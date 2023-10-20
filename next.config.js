@@ -47,6 +47,17 @@ const settings = {
       USER: 'noreply@siteinteligente.com',
       PASSWORD: '95$zaDt1',
     }),
+    region: process.env.region,
+    userPoolId: process.env.userPoolId,
+    userPoolClientId: process.env.userPoolClientId,
+    userPoolRegion: process.env.userPoolRegion,
+    identityPoolId: process.env.identityPoolId,
+    bucketName: process.env.bucketName,
+    bucketRegion: process.env.bucketRegion,
+    bucketCloudFront: process.env.bucketCloudFront,
+    graphqlURL: process.env.graphqlURL,
+    graphqlApiKey: process.env.graphqlApiKey,
+    OPENAI_API_KEY: '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'
   },
   async redirects() {
     return [redirect]

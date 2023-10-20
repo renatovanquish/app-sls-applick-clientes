@@ -1,6 +1,43 @@
 import { Amplify } from 'aws-amplify'
-import awsExports from '../aws-exports'
-Amplify.configure({ ...awsExports, ssr: true })
+// import awsExports from '../aws-exports'
+// Amplify.configure({ ...awsExports, ssr: true })
+
+Amplify.configure({
+  aws_project_region: `${process.env.region}`,
+  aws_cognito_identity_pool_id: `${process.env.identityPoolId}`,
+  aws_cognito_region: `${process.env.userPoolRegion}`,
+  aws_user_pools_id: `${process.env.userPoolId}`,
+  aws_user_pools_web_client_id: `${process.env.userPoolClientId}`,
+  oauth: {
+    // domain: 'your_cognito_domain',
+    // scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+    // redirectSignIn: 'http://localhost:3000/',
+    // redirectSignOut: 'http://localhost:3000/',
+    // responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+  },
+  aws_cognito_username_attributes: ['username'],
+  aws_cognito_social_providers: [],
+  aws_cognito_signup_attributes: ['name', 'email', 'phone_number'],
+  aws_cognito_mfa_configuration: 'OFF',
+  aws_cognito_mfa_types: [],
+  aws_cognito_password_protection_settings: {
+    passwordPolicyMinLength: 6,
+    passwordPolicyCharacters: [
+      // "REQUIRES_LOWERCASE",
+      // "REQUIRES_UPPERCASE",
+      'REQUIRES_NUMBERS',
+      // "REQUIRES_SYMBOLS"
+    ],
+  },
+  aws_cognito_verification_mechanisms: ['email'],
+  aws_user_files_s3_bucket: `${process.env.bucketName}`,
+  aws_user_files_s3_bucket_region: `${process.env.bucketRegion}`,
+  aws_appsync_graphqlEndpoint: `${process.env.graphqlURL}`,
+  aws_appsync_region: `${process.env.region}`,
+  aws_appsync_authenticationType: 'API_KEY',
+  aws_appsync_apiKey: `${process.env.graphqlApiKey}`,
+  ssr: true
+});
 
 import 'assets/main.css'
 import 'assets/chrome-bug.css'
