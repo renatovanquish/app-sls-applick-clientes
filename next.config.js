@@ -5,7 +5,7 @@
 const runtimeCaching = require('next-pwa/cache')
 
 const withPWA = require('next-pwa')({
-  disable: true,
+  disable: false,
   register: true,
   dest: 'public',
   runtimeCaching,
@@ -57,7 +57,7 @@ const settings = {
     bucketCloudFront: process.env.bucketCloudFront,
     graphqlURL: process.env.graphqlURL,
     graphqlApiKey: process.env.graphqlApiKey,
-    OPENAI_API_KEY: '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'
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY
   },
   async redirects() {
     return [redirect]
