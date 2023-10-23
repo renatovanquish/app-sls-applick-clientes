@@ -2,11 +2,13 @@ import { FC, useEffect, useState } from 'react'
 import cn from 'classnames'
 import { Device } from '@capacitor/device'
 import { useTheme } from 'next-themes'
-import { Mic, Play, Thumbnail } from 'components/icons'
+import { Mic, Play, ArrowLeft } from 'components/icons'
 import Link from 'next/link'
 import { useScreen } from 'hooks/useScreen'
 import { useUserAuth } from 'components/userAuth/context'
 import { useChat } from 'ai/react';
+import { theme } from '../../../../tailwind.config'
+import { useRouter } from 'next/router'
 
 interface Props { }
 
@@ -14,6 +16,30 @@ const IAClientes: FC<Props> = ({ }) => {
   const { messages, input, handleInputChange, handleSubmit, data } = useChat();
   const { screenWidth } = useScreen()
   const { user } = useUserAuth()
+  const { theme } = useTheme()
+
+  const [device, setDevice] = useState({} as any)
+  const [isPWA, setIsPWA] = useState(false)
+
+  const router = useRouter()
+  const { query } = router
+
+  useEffect(() => {
+    let isMounted = true
+    if (isMounted) {
+      const logDeviceInfo = async () => {
+        const info = await Device.getInfo()
+        setDevice(info)
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+          setIsPWA(true)
+        }
+      }
+      logDeviceInfo()
+    }
+    return () => {
+      setDevice({} as any)
+    }
+  }, [])
 
   return (<div className='p-4 lg:p-8'>
 
@@ -44,28 +70,44 @@ const IAClientes: FC<Props> = ({ }) => {
         ))
         : null}
 
-      <div className='bg-primary fixed bottom-0 w-full'>
-        <form onSubmit={handleSubmit} className='mb-8'>
+      <div
+        className={cn(
+          'z-50 block fixed inset-x-0 bottom-0 border-t-2 backdrop-blur-md rounded-t-box',
+          {
+            'pb-4': isPWA && device.model === 'iPhone',
+            'bg-white/80 border-slate-200': theme === 'light',
+            'bg-black/50 border-slate-500 text-accent-4': theme === 'dark',
+          }
+        )}
+      >
+        <div className='flex flex-start gap-4'>
           <Link
-            href={`${process.env.HOME}`}
+            href={`${query.t
+              ? `${process.env.HOME}?t=` +
+              encodeURIComponent(query.t.toString())
+              : `${process.env.HOME}`
+              }`}
           >
-            <span className="pr-3 text-xs justify-center inline-block text-center py-2">
-              <Thumbnail />
+            <span className="m-2 w-full text-xs justify-center inline-block text-center py-2">
+              <ArrowLeft />
             </span>
           </Link>
-          <input
-            style={{ width: screenWidth - 100 }}
-            className="border border-gray-300 rounded shadow-xl"
-            value={input}
-            placeholder="Como posso lhe ajudar?"
-            onChange={handleInputChange}
-          />
-        </form>
+          <form onSubmit={handleSubmit}>
+            <input
+              className='mt-2 border-accent-2'
+              style={{ width: screenWidth - 100 }}
+              value={input}
+              placeholder="Como posso lhe ajudar?"
+              onChange={handleInputChange}
+            />
+            <button className='ml-2' type="submit">
+              <Play />
+            </button>
+          </form>
+        </div>
       </div>
+
     </div>
-
-
-
   </div>)
 }
 
