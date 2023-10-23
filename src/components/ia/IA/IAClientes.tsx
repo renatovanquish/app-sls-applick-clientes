@@ -43,7 +43,7 @@ const IAClientes: FC<Props> = ({ }) => {
 
   return (<div className='p-4 lg:p-8'>
 
-    <div className="flex flex-col w-full max-w-md mx-auto stretch">
+    <div className="flex flex-col w-full stretch">
       {messages.length > 0
         ? messages.map(m => (
           <div key={m.id} className="whitespace-pre-wrap my-2">

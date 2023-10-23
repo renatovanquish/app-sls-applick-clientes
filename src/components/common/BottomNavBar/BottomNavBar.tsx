@@ -26,7 +26,6 @@ const BottomNavBar: FC<Props> = (props: Props) => {
 
   const router = useRouter()
   const { pathname, query } = router
-  const { alias } = query
   const rootPathname = pathname.split('/')[1]
   const { theme } = useTheme()
 
