@@ -53,7 +53,7 @@ const IAClientes: FC<Props> = ({ }) => {
             })}>
               <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
-                  {m.role === 'user' && <img alt="" src={`${process.env.MIDIA_CLOUDFRONT}${user.avatar}`}
+                  {m.role === 'user' && <img alt="" src={(user && user.avatar) ? `${process.env.MIDIA_CLOUDFRONT}${user.avatar}` : '/user/user.png'}
                     onError={(e: any) => {
                       e.target.onerror = null
                       e.target.src = '/user/user.png'
