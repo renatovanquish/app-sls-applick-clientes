@@ -2,12 +2,11 @@ import { FC, useEffect, useState } from 'react'
 import cn from 'classnames'
 import { Device } from '@capacitor/device'
 import { useTheme } from 'next-themes'
-import { Mic, Play, ArrowLeft } from 'components/icons'
+import { Play, ArrowLeft } from 'components/icons'
 import Link from 'next/link'
 import { useScreen } from 'hooks/useScreen'
 import { useUserAuth } from 'components/userAuth/context'
 import { useChat } from 'ai/react';
-import { theme } from '../../../../tailwind.config'
 import { useRouter } from 'next/router'
 
 interface Props { }
