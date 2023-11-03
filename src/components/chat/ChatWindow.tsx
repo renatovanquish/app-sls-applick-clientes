@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useChat } from "ai/react";
 import { useRef, useState } from "react";
-import type { FormEvent } from "react";
+import type { FormEvent, ReactElement } from "react";
 import type { AgentStep } from "langchain/schema";
 
 import { ChatMessageBubble } from "./ChatMessageBubble";
@@ -14,17 +14,19 @@ import { IntermediateStep } from "./IntermediateStep";
 
 export function ChatWindow(props: {
   endpoint: string,
+  emptyStateComponent: ReactElement,
   placeholder?: string,
   showIngestForm?: boolean,
   showIntermediateStepsToggle?: boolean
 }) {
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const { endpoint, placeholder, showIngestForm, showIntermediateStepsToggle } = props;
+  const { endpoint, emptyStateComponent, placeholder, showIngestForm, showIntermediateStepsToggle } = props;
 
   const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
   const [intermediateStepsLoading, setIntermediateStepsLoading] = useState(false);
   const ingestForm = showIngestForm && <UploadDocumentsForm></UploadDocumentsForm>;
+
   const intemediateStepsToggle = showIntermediateStepsToggle && (
     <div>
       <input type="checkbox" id="show_intermediate_steps" name="show_intermediate_steps" checked={showIntermediateSteps} onChange={(e) => setShowIntermediateSteps(e.target.checked)}></input>
@@ -104,7 +106,8 @@ export function ChatWindow(props: {
   }
 
   return (
-    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow overflow-hidden ${(messages.length > 0 ? "border" : "")}`}>
+    <div className={`flex flex-col items-center grow overflow-hidden`}>
+      {messages.length === 0 ? emptyStateComponent : ""}
       <div
         className="flex flex-col-reverse w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out"
         ref={messageContainerRef}

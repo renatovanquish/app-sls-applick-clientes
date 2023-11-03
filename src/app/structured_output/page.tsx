@@ -92,6 +92,7 @@ export default function AgentsPage() {
   );
   return (
     <ChatWindow
+      emptyStateComponent={<div></div>}
       endpoint="/api/chat/structured_output"
       placeholder="Como posso ajudar?"
     ></ChatWindow>

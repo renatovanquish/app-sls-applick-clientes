@@ -88,6 +88,7 @@ export default function AgentsPage() {
   );
   return (
     <ChatWindow
+      emptyStateComponent={<div></div>}
       endpoint="/api/chat/retrieval_agents"
       showIngestForm={true}
       showIntermediateStepsToggle={true}

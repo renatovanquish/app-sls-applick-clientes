@@ -77,6 +77,7 @@ export default function AgentsPage() {
   );
   return (
     <ChatWindow
+      emptyStateComponent={InfoCard}
       endpoint="/api/chat/agents"
       placeholder="Como posso ajudar?"
       showIntermediateStepsToggle={true}

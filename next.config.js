@@ -57,7 +57,10 @@ const settings = {
     bucketCloudFront: process.env.bucketCloudFront,
     graphqlURL: process.env.graphqlURL,
     graphqlApiKey: process.env.graphqlApiKey,
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY
+    DEBUG_MODE: process.env.DEBUG_MODE,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_PRIVATE_KEY: process.env.SUPABASE_PRIVATE_KEY,
   },
   async redirects() {
     return [redirect]

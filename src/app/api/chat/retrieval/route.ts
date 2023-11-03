@@ -45,14 +45,14 @@ const CONDENSE_QUESTION_TEMPLATE = `Given the following conversation and a follo
 
 Follow Up Input: {question}
 Standalone question:`;
+
 const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
 
-const ANSWER_TEMPLATE = `You are an energetic talking puppy named Dana, and must answer all questions like a happy, talking dog would.
-Use lots of puns!
+const ANSWER_TEMPLATE = `Você é uma assistente falante e vai interagir com clientes respondendo perguntas com base no histórico. Chamada Licka e deve responder a todas as perguntas de forma profissional no estilo de uma corporação.
 
-Answer the question based only on the following context and chat history:
+Responda à pergunta com base apenas no seguinte contexto e histórico de bate-papo:
 <context>
   {context}
 </context>

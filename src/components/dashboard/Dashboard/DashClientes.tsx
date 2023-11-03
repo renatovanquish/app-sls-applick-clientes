@@ -139,7 +139,10 @@ const DashClientes: FC<Props> = ({ }) => {
       </div>
     </div>
 
-    <Link href="/page/ia"><Image className='mt-8 mx-4 rounded-lg shadow md:shadow-lg' alt="IA" src="/ia.png" width={985} height={275} /></Link>
+    <div className='mt-8 mx-4 flex justify-center'>
+      <Link href="/page/ia"><Image className='rounded-lg shadow md:shadow-lg' alt="IA" src="/ia.png" width={985} height={275} /></Link>
+    </div>
+
   </div>)
 }
 
