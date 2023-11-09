@@ -18,8 +18,8 @@ export function ChatMessageBubble(props: { message: Message, sources: any[] }) {
         <Image
           src='/user/ia.png'
           alt=""
-          width={50}
-          height={50}
+          width={55}
+          height={55}
           className="rounded-full shadow-lg"
         />
       </div>}

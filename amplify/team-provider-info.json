@@ -19,23 +19,23 @@
       "function": {
         "AdminAddUserToGroup": {
           "deploymentBucketName": "amplify-appsls-master-220452-deployment",
-          "s3Key": "amplify-builds/AdminAddUserToGroup-326642376d5747696a6c-build.zip"
+          "s3Key": "amplify-builds/AdminAddUserToGroup-6d6f2f2f35774a704968-build.zip"
         },
         "AdminCreateUser": {
           "deploymentBucketName": "amplify-appsls-master-220452-deployment",
-          "s3Key": "amplify-builds/AdminCreateUser-644a4c6434346c526b37-build.zip"
+          "s3Key": "amplify-builds/AdminCreateUser-48472b6d6670686f4f56-build.zip"
         },
         "AdminDeleteUser": {
           "deploymentBucketName": "amplify-appsls-master-220452-deployment",
-          "s3Key": "amplify-builds/AdminDeleteUser-6b65546a356f30645267-build.zip"
+          "s3Key": "amplify-builds/AdminDeleteUser-494f7436697745595030-build.zip"
         },
         "AdminQueries0ab6d7b2": {
           "deploymentBucketName": "amplify-appsls-master-220452-deployment",
-          "s3Key": "amplify-builds/AdminQueries0ab6d7b2-45316357663379596c6a-build.zip"
+          "s3Key": "amplify-builds/AdminQueries0ab6d7b2-44667559652b32653370-build.zip"
         },
         "AdminUpdateUserAttributes": {
           "deploymentBucketName": "amplify-appsls-master-220452-deployment",
-          "s3Key": "amplify-builds/AdminUpdateUserAttributes-4d504a6249565146456e-build.zip"
+          "s3Key": "amplify-builds/AdminUpdateUserAttributes-6c6b4c796753702f776b-build.zip"
         }
       },
       "storage": {

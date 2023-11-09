@@ -42,7 +42,8 @@
       "Admin",
       "Clinica",
       "Profissional",
-      "Colaborador"
+      "Colaborador",
+      "Cliente"
     ],
     "userPoolGroups": true,
     "usernameAttributes": [

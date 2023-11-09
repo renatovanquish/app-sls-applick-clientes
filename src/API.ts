@@ -2979,6 +2979,37 @@ export type DeleteDeliveryMethodOrderInput = {
   id: string,
 };
 
+export type UpdateNotifyInput = {
+  id: string,
+  userID?: string | null,
+  createdAt?: string | null,
+  content?: string | null,
+  link?: string | null,
+  viewed?: boolean | null,
+};
+
+export type ModelNotifyConditionInput = {
+  userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  viewed?: ModelBooleanInput | null,
+  and?: Array< ModelNotifyConditionInput | null > | null,
+  or?: Array< ModelNotifyConditionInput | null > | null,
+  not?: ModelNotifyConditionInput | null,
+};
+
+export type Notify = {
+  __typename: "Notify",
+  id: string,
+  userID: string,
+  createdAt?: string | null,
+  content?: string | null,
+  link?: string | null,
+  viewed?: boolean | null,
+  updatedAt: string,
+};
+
 export type CreateCampaignInput = {
   id?: string | null,
   name: string,
@@ -3357,6 +3388,363 @@ export type ModelAuthorizationListMemberConditionInput = {
 };
 
 export type DeleteAuthorizationListMemberInput = {
+  id: string,
+};
+
+export type CreateClientInput = {
+  id?: string | null,
+  name: string,
+  notes?: string | null,
+  status: ClientStatus,
+  search?: string | null,
+  code?: string | null,
+};
+
+export enum ClientStatus {
+  ACTIVE = "ACTIVE",
+  SUSPENDED = "SUSPENDED",
+}
+
+
+export type ModelClientConditionInput = {
+  name?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelClientStatusInput | null,
+  search?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelClientConditionInput | null > | null,
+  or?: Array< ModelClientConditionInput | null > | null,
+  not?: ModelClientConditionInput | null,
+};
+
+export type ModelClientStatusInput = {
+  eq?: ClientStatus | null,
+  ne?: ClientStatus | null,
+};
+
+export type Client = {
+  __typename: "Client",
+  id: string,
+  name: string,
+  notes?: string | null,
+  status: ClientStatus,
+  search?: string | null,
+  code?: string | null,
+  units?: ModelClientUnitConnection | null,
+  eligibles?: ModelClientEligibleConnection | null,
+  oss?: ModelOSConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelClientUnitConnection = {
+  __typename: "ModelClientUnitConnection",
+  items:  Array<ClientUnit | null >,
+  nextToken?: string | null,
+};
+
+export type ClientUnit = {
+  __typename: "ClientUnit",
+  id: string,
+  clientID: string,
+  name?: string | null,
+  street?: string | null,
+  number?: string | null,
+  complement?: string | null,
+  zipcode?: string | null,
+  neighborhood?: string | null,
+  city?: string | null,
+  state?: string | null,
+  country?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  contactName?: string | null,
+  contactEmail?: string | null,
+  contactPhone?: string | null,
+  code?: string | null,
+  oss?: ModelOSConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelOSConnection = {
+  __typename: "ModelOSConnection",
+  items:  Array<OS | null >,
+  nextToken?: string | null,
+};
+
+export type OS = {
+  __typename: "OS",
+  id: string,
+  clientID: string,
+  clientUnitID: string,
+  driverID?: string | null,
+  professionals: Array< string >,
+  collaborators?: Array< string > | null,
+  number: number,
+  start?: string | null,
+  expiration?: string | null,
+  orientation?: string | null,
+  notes?: string | null,
+  status: OSStatus,
+  allowOffList?: boolean | null,
+  withList?: boolean | null,
+  vaccination?: string | null,
+  qtyApplication?: number | null,
+  dateStarted?: string | null,
+  dateFinished?: string | null,
+  professionalStarted?: string | null,
+  professionalFinished?: string | null,
+  notesStarted?: string | null,
+  notesFinished?: string | null,
+  clientNameStarted?: string | null,
+  clientNameFinished?: string | null,
+  unitNameFinished?: string | null,
+  contactNameFinished?: string | null,
+  contactDocFinished?: string | null,
+  contactCRMFinished?: string | null,
+  contactEmailFinished?: string | null,
+  stayVaccines?: boolean | null,
+  stayQtd?: number | null,
+  lat?: number | null,
+  lng?: number | null,
+  eligiblesVaccination?: ModelEligibleVaccinationConnection | null,
+  client?: Client | null,
+  clientUnit?: ClientUnit | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum OSStatus {
+  STANDBY = "STANDBY",
+  STARTED = "STARTED",
+  FINISHED = "FINISHED",
+}
+
+
+export type ModelEligibleVaccinationConnection = {
+  __typename: "ModelEligibleVaccinationConnection",
+  items:  Array<EligibleVaccination | null >,
+  nextToken?: string | null,
+};
+
+export type EligibleVaccination = {
+  __typename: "EligibleVaccination",
+  id: string,
+  clientEligibleID: string,
+  clientEligible?: ClientEligible | null,
+  profissionalID?: string | null,
+  profissional?: User | null,
+  coren?: string | null,
+  applicationDate?: string | null,
+  reason?: string | null,
+  vaccination?: string | null,
+  status?: EligibleVaccinationStatus | null,
+  localCity?: string | null,
+  localState?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ClientEligible = {
+  __typename: "ClientEligible",
+  id: string,
+  clientID: string,
+  key: string,
+  name?: string | null,
+  cpf?: string | null,
+  rg?: string | null,
+  birth?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  relationship?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum EligibleVaccinationStatus {
+  CANCELED = "CANCELED",
+  APPLIED = "APPLIED",
+}
+
+
+export type ModelClientEligibleConnection = {
+  __typename: "ModelClientEligibleConnection",
+  items:  Array<ClientEligible | null >,
+  nextToken?: string | null,
+};
+
+export type UpdateClientInput = {
+  id: string,
+  name?: string | null,
+  notes?: string | null,
+  status?: ClientStatus | null,
+  search?: string | null,
+  code?: string | null,
+};
+
+export type DeleteClientInput = {
+  id: string,
+};
+
+export type CreateClientUnitInput = {
+  id?: string | null,
+  clientID: string,
+  name?: string | null,
+  street?: string | null,
+  number?: string | null,
+  complement?: string | null,
+  zipcode?: string | null,
+  neighborhood?: string | null,
+  city?: string | null,
+  state?: string | null,
+  country?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  contactName?: string | null,
+  contactEmail?: string | null,
+  contactPhone?: string | null,
+  code?: string | null,
+};
+
+export type ModelClientUnitConditionInput = {
+  clientID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  street?: ModelStringInput | null,
+  number?: ModelStringInput | null,
+  complement?: ModelStringInput | null,
+  zipcode?: ModelStringInput | null,
+  neighborhood?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  state?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  search?: ModelStringInput | null,
+  contactName?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  contactPhone?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelClientUnitConditionInput | null > | null,
+  or?: Array< ModelClientUnitConditionInput | null > | null,
+  not?: ModelClientUnitConditionInput | null,
+};
+
+export type UpdateClientUnitInput = {
+  id: string,
+  clientID?: string | null,
+  name?: string | null,
+  street?: string | null,
+  number?: string | null,
+  complement?: string | null,
+  zipcode?: string | null,
+  neighborhood?: string | null,
+  city?: string | null,
+  state?: string | null,
+  country?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  contactName?: string | null,
+  contactEmail?: string | null,
+  contactPhone?: string | null,
+  code?: string | null,
+};
+
+export type DeleteClientUnitInput = {
+  id: string,
+};
+
+export type CreateClientEligibleInput = {
+  id?: string | null,
+  clientID: string,
+  key: string,
+  name?: string | null,
+  cpf?: string | null,
+  rg?: string | null,
+  birth?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  relationship?: string | null,
+};
+
+export type ModelClientEligibleConditionInput = {
+  clientID?: ModelIDInput | null,
+  key?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  cpf?: ModelStringInput | null,
+  rg?: ModelStringInput | null,
+  birth?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  search?: ModelStringInput | null,
+  relationship?: ModelStringInput | null,
+  and?: Array< ModelClientEligibleConditionInput | null > | null,
+  or?: Array< ModelClientEligibleConditionInput | null > | null,
+  not?: ModelClientEligibleConditionInput | null,
+};
+
+export type UpdateClientEligibleInput = {
+  id: string,
+  clientID?: string | null,
+  key?: string | null,
+  name?: string | null,
+  cpf?: string | null,
+  rg?: string | null,
+  birth?: string | null,
+  notes?: string | null,
+  search?: string | null,
+  relationship?: string | null,
+};
+
+export type DeleteClientEligibleInput = {
+  id: string,
+};
+
+export type CreateEligibleVaccinationInput = {
+  id?: string | null,
+  clientEligibleID: string,
+  profissionalID?: string | null,
+  coren?: string | null,
+  applicationDate?: string | null,
+  reason?: string | null,
+  vaccination?: string | null,
+  status?: EligibleVaccinationStatus | null,
+  localCity?: string | null,
+  localState?: string | null,
+};
+
+export type ModelEligibleVaccinationConditionInput = {
+  clientEligibleID?: ModelIDInput | null,
+  profissionalID?: ModelIDInput | null,
+  coren?: ModelStringInput | null,
+  applicationDate?: ModelStringInput | null,
+  reason?: ModelStringInput | null,
+  vaccination?: ModelStringInput | null,
+  status?: ModelEligibleVaccinationStatusInput | null,
+  localCity?: ModelStringInput | null,
+  localState?: ModelStringInput | null,
+  and?: Array< ModelEligibleVaccinationConditionInput | null > | null,
+  or?: Array< ModelEligibleVaccinationConditionInput | null > | null,
+  not?: ModelEligibleVaccinationConditionInput | null,
+};
+
+export type ModelEligibleVaccinationStatusInput = {
+  eq?: EligibleVaccinationStatus | null,
+  ne?: EligibleVaccinationStatus | null,
+};
+
+export type UpdateEligibleVaccinationInput = {
+  id: string,
+  clientEligibleID?: string | null,
+  profissionalID?: string | null,
+  coren?: string | null,
+  applicationDate?: string | null,
+  reason?: string | null,
+  vaccination?: string | null,
+  status?: EligibleVaccinationStatus | null,
+  localCity?: string | null,
+  localState?: string | null,
+};
+
+export type DeleteEligibleVaccinationInput = {
   id: string,
 };
 
@@ -3899,6 +4287,19 @@ export type DeleteDeliveryOrderInput = {
   id: string,
 };
 
+export type CreateNotifyInput = {
+  id?: string | null,
+  userID: string,
+  createdAt?: string | null,
+  content?: string | null,
+  link?: string | null,
+  viewed?: boolean | null,
+};
+
+export type DeleteNotifyInput = {
+  id: string,
+};
+
 export type UpdateCampaignInput = {
   id: string,
   name?: string | null,
@@ -4093,6 +4494,154 @@ export type DeleteCounterInput = {
   id: string,
 };
 
+export type CreateClientUserInput = {
+  id?: string | null,
+  userID: string,
+  clientID: string,
+};
+
+export type ModelClientUserConditionInput = {
+  userID?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  and?: Array< ModelClientUserConditionInput | null > | null,
+  or?: Array< ModelClientUserConditionInput | null > | null,
+  not?: ModelClientUserConditionInput | null,
+};
+
+export type ClientUser = {
+  __typename: "ClientUser",
+  id: string,
+  userID: string,
+  user?: User | null,
+  clientID: string,
+  client?: Client | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type DeleteClientUserInput = {
+  id: string,
+};
+
+export type CreateOSInput = {
+  id?: string | null,
+  clientID: string,
+  clientUnitID: string,
+  driverID?: string | null,
+  professionals: Array< string >,
+  collaborators?: Array< string > | null,
+  number: number,
+  start?: string | null,
+  expiration?: string | null,
+  orientation?: string | null,
+  notes?: string | null,
+  status: OSStatus,
+  allowOffList?: boolean | null,
+  withList?: boolean | null,
+  vaccination?: string | null,
+  qtyApplication?: number | null,
+  dateStarted?: string | null,
+  dateFinished?: string | null,
+  professionalStarted?: string | null,
+  professionalFinished?: string | null,
+  notesStarted?: string | null,
+  notesFinished?: string | null,
+  clientNameStarted?: string | null,
+  clientNameFinished?: string | null,
+  unitNameFinished?: string | null,
+  contactNameFinished?: string | null,
+  contactDocFinished?: string | null,
+  contactCRMFinished?: string | null,
+  contactEmailFinished?: string | null,
+  stayVaccines?: boolean | null,
+  stayQtd?: number | null,
+  lat?: number | null,
+  lng?: number | null,
+};
+
+export type ModelOSConditionInput = {
+  clientID?: ModelIDInput | null,
+  clientUnitID?: ModelIDInput | null,
+  driverID?: ModelIDInput | null,
+  professionals?: ModelIDInput | null,
+  collaborators?: ModelIDInput | null,
+  number?: ModelIntInput | null,
+  start?: ModelStringInput | null,
+  expiration?: ModelStringInput | null,
+  orientation?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelOSStatusInput | null,
+  allowOffList?: ModelBooleanInput | null,
+  withList?: ModelBooleanInput | null,
+  vaccination?: ModelStringInput | null,
+  qtyApplication?: ModelIntInput | null,
+  dateStarted?: ModelStringInput | null,
+  dateFinished?: ModelStringInput | null,
+  professionalStarted?: ModelIDInput | null,
+  professionalFinished?: ModelIDInput | null,
+  notesStarted?: ModelStringInput | null,
+  notesFinished?: ModelStringInput | null,
+  clientNameStarted?: ModelStringInput | null,
+  clientNameFinished?: ModelStringInput | null,
+  unitNameFinished?: ModelStringInput | null,
+  contactNameFinished?: ModelStringInput | null,
+  contactDocFinished?: ModelStringInput | null,
+  contactCRMFinished?: ModelStringInput | null,
+  contactEmailFinished?: ModelStringInput | null,
+  stayVaccines?: ModelBooleanInput | null,
+  stayQtd?: ModelIntInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  and?: Array< ModelOSConditionInput | null > | null,
+  or?: Array< ModelOSConditionInput | null > | null,
+  not?: ModelOSConditionInput | null,
+};
+
+export type ModelOSStatusInput = {
+  eq?: OSStatus | null,
+  ne?: OSStatus | null,
+};
+
+export type UpdateOSInput = {
+  id: string,
+  clientID?: string | null,
+  clientUnitID?: string | null,
+  driverID?: string | null,
+  professionals?: Array< string > | null,
+  collaborators?: Array< string > | null,
+  number?: number | null,
+  start?: string | null,
+  expiration?: string | null,
+  orientation?: string | null,
+  notes?: string | null,
+  status?: OSStatus | null,
+  allowOffList?: boolean | null,
+  withList?: boolean | null,
+  vaccination?: string | null,
+  qtyApplication?: number | null,
+  dateStarted?: string | null,
+  dateFinished?: string | null,
+  professionalStarted?: string | null,
+  professionalFinished?: string | null,
+  notesStarted?: string | null,
+  notesFinished?: string | null,
+  clientNameStarted?: string | null,
+  clientNameFinished?: string | null,
+  unitNameFinished?: string | null,
+  contactNameFinished?: string | null,
+  contactDocFinished?: string | null,
+  contactCRMFinished?: string | null,
+  contactEmailFinished?: string | null,
+  stayVaccines?: boolean | null,
+  stayQtd?: number | null,
+  lat?: number | null,
+  lng?: number | null,
+};
+
+export type DeleteOSInput = {
+  id: string,
+};
+
 export type ModelFolderFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -4142,6 +4691,24 @@ export type ModelPayMethodFilterInput = {
   and?: Array< ModelPayMethodFilterInput | null > | null,
   or?: Array< ModelPayMethodFilterInput | null > | null,
   not?: ModelPayMethodFilterInput | null,
+};
+
+export type ModelNotifyFilterInput = {
+  id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  viewed?: ModelBooleanInput | null,
+  and?: Array< ModelNotifyFilterInput | null > | null,
+  or?: Array< ModelNotifyFilterInput | null > | null,
+  not?: ModelNotifyFilterInput | null,
+};
+
+export type ModelNotifyConnection = {
+  __typename: "ModelNotifyConnection",
+  items:  Array<Notify | null >,
+  nextToken?: string | null,
 };
 
 export type ModelInviteFilterInput = {
@@ -4449,6 +5016,133 @@ export type ModelAuthorizationListClosureConnection = {
   nextToken?: string | null,
 };
 
+export type ModelClientFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelClientStatusInput | null,
+  search?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelClientFilterInput | null > | null,
+  or?: Array< ModelClientFilterInput | null > | null,
+  not?: ModelClientFilterInput | null,
+};
+
+export type ModelClientConnection = {
+  __typename: "ModelClientConnection",
+  items:  Array<Client | null >,
+  nextToken?: string | null,
+};
+
+export type ModelClientUserFilterInput = {
+  id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  and?: Array< ModelClientUserFilterInput | null > | null,
+  or?: Array< ModelClientUserFilterInput | null > | null,
+  not?: ModelClientUserFilterInput | null,
+};
+
+export type ModelClientUserConnection = {
+  __typename: "ModelClientUserConnection",
+  items:  Array<ClientUser | null >,
+  nextToken?: string | null,
+};
+
+export type ModelClientUnitFilterInput = {
+  id?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  street?: ModelStringInput | null,
+  number?: ModelStringInput | null,
+  complement?: ModelStringInput | null,
+  zipcode?: ModelStringInput | null,
+  neighborhood?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  state?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  search?: ModelStringInput | null,
+  contactName?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  contactPhone?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelClientUnitFilterInput | null > | null,
+  or?: Array< ModelClientUnitFilterInput | null > | null,
+  not?: ModelClientUnitFilterInput | null,
+};
+
+export type ModelClientEligibleFilterInput = {
+  id?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  key?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  cpf?: ModelStringInput | null,
+  rg?: ModelStringInput | null,
+  birth?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  search?: ModelStringInput | null,
+  relationship?: ModelStringInput | null,
+  and?: Array< ModelClientEligibleFilterInput | null > | null,
+  or?: Array< ModelClientEligibleFilterInput | null > | null,
+  not?: ModelClientEligibleFilterInput | null,
+};
+
+export type ModelOSFilterInput = {
+  id?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  clientUnitID?: ModelIDInput | null,
+  driverID?: ModelIDInput | null,
+  professionals?: ModelIDInput | null,
+  collaborators?: ModelIDInput | null,
+  number?: ModelIntInput | null,
+  start?: ModelStringInput | null,
+  expiration?: ModelStringInput | null,
+  orientation?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelOSStatusInput | null,
+  allowOffList?: ModelBooleanInput | null,
+  withList?: ModelBooleanInput | null,
+  vaccination?: ModelStringInput | null,
+  qtyApplication?: ModelIntInput | null,
+  dateStarted?: ModelStringInput | null,
+  dateFinished?: ModelStringInput | null,
+  professionalStarted?: ModelIDInput | null,
+  professionalFinished?: ModelIDInput | null,
+  notesStarted?: ModelStringInput | null,
+  notesFinished?: ModelStringInput | null,
+  clientNameStarted?: ModelStringInput | null,
+  clientNameFinished?: ModelStringInput | null,
+  unitNameFinished?: ModelStringInput | null,
+  contactNameFinished?: ModelStringInput | null,
+  contactDocFinished?: ModelStringInput | null,
+  contactCRMFinished?: ModelStringInput | null,
+  contactEmailFinished?: ModelStringInput | null,
+  stayVaccines?: ModelBooleanInput | null,
+  stayQtd?: ModelIntInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  and?: Array< ModelOSFilterInput | null > | null,
+  or?: Array< ModelOSFilterInput | null > | null,
+  not?: ModelOSFilterInput | null,
+};
+
+export type ModelEligibleVaccinationFilterInput = {
+  id?: ModelIDInput | null,
+  clientEligibleID?: ModelIDInput | null,
+  profissionalID?: ModelIDInput | null,
+  coren?: ModelStringInput | null,
+  applicationDate?: ModelStringInput | null,
+  reason?: ModelStringInput | null,
+  vaccination?: ModelStringInput | null,
+  status?: ModelEligibleVaccinationStatusInput | null,
+  localCity?: ModelStringInput | null,
+  localState?: ModelStringInput | null,
+  and?: Array< ModelEligibleVaccinationFilterInput | null > | null,
+  or?: Array< ModelEligibleVaccinationFilterInput | null > | null,
+  not?: ModelEligibleVaccinationFilterInput | null,
+};
+
 export type ModelSubscriptionCartFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   productID?: ModelSubscriptionIDInput | null,
@@ -4578,6 +5272,11 @@ export type GetUserCustomQuery = {
       allowViewPhone?: boolean | null,
       customerPagarmeID?: string | null,
       birth?: string | null,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+      } | null,
     } | null,
   } | null,
 };
@@ -7765,6 +8464,7 @@ export type ListVaccinationCardsItemsByCompanyCustomQuery = {
       company?:  {
         __typename: "Company",
         name: string,
+        city?: string | null,
       } | null,
       lote?: string | null,
       profissionalName?: string | null,
@@ -10579,6 +11279,24 @@ export type DeleteDeliveryMethodOrderMutation = {
   } | null,
 };
 
+export type UpdateNotifyMutationVariables = {
+  input: UpdateNotifyInput,
+  condition?: ModelNotifyConditionInput | null,
+};
+
+export type UpdateNotifyMutation = {
+  updateNotify?:  {
+    __typename: "Notify",
+    id: string,
+    userID: string,
+    createdAt?: string | null,
+    content?: string | null,
+    link?: string | null,
+    viewed?: boolean | null,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateCampaignMutationVariables = {
   input: CreateCampaignInput,
   condition?: ModelCampaignConditionInput | null,
@@ -11436,6 +12154,423 @@ export type DeleteAuthorizationListMemberMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateClientMutationVariables = {
+  input: CreateClientInput,
+  condition?: ModelClientConditionInput | null,
+};
+
+export type CreateClientMutation = {
+  createClient?:  {
+    __typename: "Client",
+    id: string,
+    name: string,
+    notes?: string | null,
+    status: ClientStatus,
+    search?: string | null,
+    code?: string | null,
+    units?:  {
+      __typename: "ModelClientUnitConnection",
+      nextToken?: string | null,
+    } | null,
+    eligibles?:  {
+      __typename: "ModelClientEligibleConnection",
+      nextToken?: string | null,
+    } | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateClientMutationVariables = {
+  input: UpdateClientInput,
+  condition?: ModelClientConditionInput | null,
+};
+
+export type UpdateClientMutation = {
+  updateClient?:  {
+    __typename: "Client",
+    id: string,
+    name: string,
+    notes?: string | null,
+    status: ClientStatus,
+    search?: string | null,
+    code?: string | null,
+    units?:  {
+      __typename: "ModelClientUnitConnection",
+      nextToken?: string | null,
+    } | null,
+    eligibles?:  {
+      __typename: "ModelClientEligibleConnection",
+      nextToken?: string | null,
+    } | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteClientMutationVariables = {
+  input: DeleteClientInput,
+  condition?: ModelClientConditionInput | null,
+};
+
+export type DeleteClientMutation = {
+  deleteClient?:  {
+    __typename: "Client",
+    id: string,
+    name: string,
+    notes?: string | null,
+    status: ClientStatus,
+    search?: string | null,
+    code?: string | null,
+    units?:  {
+      __typename: "ModelClientUnitConnection",
+      nextToken?: string | null,
+    } | null,
+    eligibles?:  {
+      __typename: "ModelClientEligibleConnection",
+      nextToken?: string | null,
+    } | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateClientUnitMutationVariables = {
+  input: CreateClientUnitInput,
+  condition?: ModelClientUnitConditionInput | null,
+};
+
+export type CreateClientUnitMutation = {
+  createClientUnit?:  {
+    __typename: "ClientUnit",
+    id: string,
+    clientID: string,
+    name?: string | null,
+    street?: string | null,
+    number?: string | null,
+    complement?: string | null,
+    zipcode?: string | null,
+    neighborhood?: string | null,
+    city?: string | null,
+    state?: string | null,
+    country?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    contactName?: string | null,
+    contactEmail?: string | null,
+    contactPhone?: string | null,
+    code?: string | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateClientUnitMutationVariables = {
+  input: UpdateClientUnitInput,
+  condition?: ModelClientUnitConditionInput | null,
+};
+
+export type UpdateClientUnitMutation = {
+  updateClientUnit?:  {
+    __typename: "ClientUnit",
+    id: string,
+    clientID: string,
+    name?: string | null,
+    street?: string | null,
+    number?: string | null,
+    complement?: string | null,
+    zipcode?: string | null,
+    neighborhood?: string | null,
+    city?: string | null,
+    state?: string | null,
+    country?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    contactName?: string | null,
+    contactEmail?: string | null,
+    contactPhone?: string | null,
+    code?: string | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteClientUnitMutationVariables = {
+  input: DeleteClientUnitInput,
+  condition?: ModelClientUnitConditionInput | null,
+};
+
+export type DeleteClientUnitMutation = {
+  deleteClientUnit?:  {
+    __typename: "ClientUnit",
+    id: string,
+    clientID: string,
+    name?: string | null,
+    street?: string | null,
+    number?: string | null,
+    complement?: string | null,
+    zipcode?: string | null,
+    neighborhood?: string | null,
+    city?: string | null,
+    state?: string | null,
+    country?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    contactName?: string | null,
+    contactEmail?: string | null,
+    contactPhone?: string | null,
+    code?: string | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateClientEligibleMutationVariables = {
+  input: CreateClientEligibleInput,
+  condition?: ModelClientEligibleConditionInput | null,
+};
+
+export type CreateClientEligibleMutation = {
+  createClientEligible?:  {
+    __typename: "ClientEligible",
+    id: string,
+    clientID: string,
+    key: string,
+    name?: string | null,
+    cpf?: string | null,
+    rg?: string | null,
+    birth?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    relationship?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateClientEligibleMutationVariables = {
+  input: UpdateClientEligibleInput,
+  condition?: ModelClientEligibleConditionInput | null,
+};
+
+export type UpdateClientEligibleMutation = {
+  updateClientEligible?:  {
+    __typename: "ClientEligible",
+    id: string,
+    clientID: string,
+    key: string,
+    name?: string | null,
+    cpf?: string | null,
+    rg?: string | null,
+    birth?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    relationship?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteClientEligibleMutationVariables = {
+  input: DeleteClientEligibleInput,
+  condition?: ModelClientEligibleConditionInput | null,
+};
+
+export type DeleteClientEligibleMutation = {
+  deleteClientEligible?:  {
+    __typename: "ClientEligible",
+    id: string,
+    clientID: string,
+    key: string,
+    name?: string | null,
+    cpf?: string | null,
+    rg?: string | null,
+    birth?: string | null,
+    notes?: string | null,
+    search?: string | null,
+    relationship?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateEligibleVaccinationMutationVariables = {
+  input: CreateEligibleVaccinationInput,
+  condition?: ModelEligibleVaccinationConditionInput | null,
+};
+
+export type CreateEligibleVaccinationMutation = {
+  createEligibleVaccination?:  {
+    __typename: "EligibleVaccination",
+    id: string,
+    clientEligibleID: string,
+    clientEligible?:  {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    profissionalID?: string | null,
+    profissional?:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone?: string | null,
+      status?: UserStatus | null,
+      active?: boolean | null,
+      avatar?: string | null,
+      search?: string | null,
+      createdAt?: string | null,
+      updatedAt: string,
+    } | null,
+    coren?: string | null,
+    applicationDate?: string | null,
+    reason?: string | null,
+    vaccination?: string | null,
+    status?: EligibleVaccinationStatus | null,
+    localCity?: string | null,
+    localState?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateEligibleVaccinationMutationVariables = {
+  input: UpdateEligibleVaccinationInput,
+  condition?: ModelEligibleVaccinationConditionInput | null,
+};
+
+export type UpdateEligibleVaccinationMutation = {
+  updateEligibleVaccination?:  {
+    __typename: "EligibleVaccination",
+    id: string,
+    clientEligibleID: string,
+    clientEligible?:  {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    profissionalID?: string | null,
+    profissional?:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone?: string | null,
+      status?: UserStatus | null,
+      active?: boolean | null,
+      avatar?: string | null,
+      search?: string | null,
+      createdAt?: string | null,
+      updatedAt: string,
+    } | null,
+    coren?: string | null,
+    applicationDate?: string | null,
+    reason?: string | null,
+    vaccination?: string | null,
+    status?: EligibleVaccinationStatus | null,
+    localCity?: string | null,
+    localState?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteEligibleVaccinationMutationVariables = {
+  input: DeleteEligibleVaccinationInput,
+  condition?: ModelEligibleVaccinationConditionInput | null,
+};
+
+export type DeleteEligibleVaccinationMutation = {
+  deleteEligibleVaccination?:  {
+    __typename: "EligibleVaccination",
+    id: string,
+    clientEligibleID: string,
+    clientEligible?:  {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    profissionalID?: string | null,
+    profissional?:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone?: string | null,
+      status?: UserStatus | null,
+      active?: boolean | null,
+      avatar?: string | null,
+      search?: string | null,
+      createdAt?: string | null,
+      updatedAt: string,
+    } | null,
+    coren?: string | null,
+    applicationDate?: string | null,
+    reason?: string | null,
+    vaccination?: string | null,
+    status?: EligibleVaccinationStatus | null,
+    localCity?: string | null,
+    localState?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -13495,6 +14630,42 @@ export type DeleteDeliveryOrderMutation = {
   } | null,
 };
 
+export type CreateNotifyMutationVariables = {
+  input: CreateNotifyInput,
+  condition?: ModelNotifyConditionInput | null,
+};
+
+export type CreateNotifyMutation = {
+  createNotify?:  {
+    __typename: "Notify",
+    id: string,
+    userID: string,
+    createdAt?: string | null,
+    content?: string | null,
+    link?: string | null,
+    viewed?: boolean | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteNotifyMutationVariables = {
+  input: DeleteNotifyInput,
+  condition?: ModelNotifyConditionInput | null,
+};
+
+export type DeleteNotifyMutation = {
+  deleteNotify?:  {
+    __typename: "Notify",
+    id: string,
+    userID: string,
+    createdAt?: string | null,
+    content?: string | null,
+    link?: string | null,
+    viewed?: boolean | null,
+    updatedAt: string,
+  } | null,
+};
+
 export type UpdateCampaignMutationVariables = {
   input: UpdateCampaignInput,
   condition?: ModelCampaignConditionInput | null,
@@ -14403,6 +15574,335 @@ export type DeleteCounterMutation = {
   } | null,
 };
 
+export type CreateClientUserMutationVariables = {
+  input: CreateClientUserInput,
+  condition?: ModelClientUserConditionInput | null,
+};
+
+export type CreateClientUserMutation = {
+  createClientUser?:  {
+    __typename: "ClientUser",
+    id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone?: string | null,
+      status?: UserStatus | null,
+      active?: boolean | null,
+      avatar?: string | null,
+      search?: string | null,
+      createdAt?: string | null,
+      updatedAt: string,
+    } | null,
+    clientID: string,
+    client?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteClientUserMutationVariables = {
+  input: DeleteClientUserInput,
+  condition?: ModelClientUserConditionInput | null,
+};
+
+export type DeleteClientUserMutation = {
+  deleteClientUser?:  {
+    __typename: "ClientUser",
+    id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone?: string | null,
+      status?: UserStatus | null,
+      active?: boolean | null,
+      avatar?: string | null,
+      search?: string | null,
+      createdAt?: string | null,
+      updatedAt: string,
+    } | null,
+    clientID: string,
+    client?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateOSMutationVariables = {
+  input: CreateOSInput,
+  condition?: ModelOSConditionInput | null,
+};
+
+export type CreateOSMutation = {
+  createOS?:  {
+    __typename: "OS",
+    id: string,
+    clientID: string,
+    clientUnitID: string,
+    driverID?: string | null,
+    professionals: Array< string >,
+    collaborators?: Array< string > | null,
+    number: number,
+    start?: string | null,
+    expiration?: string | null,
+    orientation?: string | null,
+    notes?: string | null,
+    status: OSStatus,
+    allowOffList?: boolean | null,
+    withList?: boolean | null,
+    vaccination?: string | null,
+    qtyApplication?: number | null,
+    dateStarted?: string | null,
+    dateFinished?: string | null,
+    professionalStarted?: string | null,
+    professionalFinished?: string | null,
+    notesStarted?: string | null,
+    notesFinished?: string | null,
+    clientNameStarted?: string | null,
+    clientNameFinished?: string | null,
+    unitNameFinished?: string | null,
+    contactNameFinished?: string | null,
+    contactDocFinished?: string | null,
+    contactCRMFinished?: string | null,
+    contactEmailFinished?: string | null,
+    stayVaccines?: boolean | null,
+    stayQtd?: number | null,
+    lat?: number | null,
+    lng?: number | null,
+    eligiblesVaccination?:  {
+      __typename: "ModelEligibleVaccinationConnection",
+      nextToken?: string | null,
+    } | null,
+    client?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    clientUnit?:  {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateOSMutationVariables = {
+  input: UpdateOSInput,
+  condition?: ModelOSConditionInput | null,
+};
+
+export type UpdateOSMutation = {
+  updateOS?:  {
+    __typename: "OS",
+    id: string,
+    clientID: string,
+    clientUnitID: string,
+    driverID?: string | null,
+    professionals: Array< string >,
+    collaborators?: Array< string > | null,
+    number: number,
+    start?: string | null,
+    expiration?: string | null,
+    orientation?: string | null,
+    notes?: string | null,
+    status: OSStatus,
+    allowOffList?: boolean | null,
+    withList?: boolean | null,
+    vaccination?: string | null,
+    qtyApplication?: number | null,
+    dateStarted?: string | null,
+    dateFinished?: string | null,
+    professionalStarted?: string | null,
+    professionalFinished?: string | null,
+    notesStarted?: string | null,
+    notesFinished?: string | null,
+    clientNameStarted?: string | null,
+    clientNameFinished?: string | null,
+    unitNameFinished?: string | null,
+    contactNameFinished?: string | null,
+    contactDocFinished?: string | null,
+    contactCRMFinished?: string | null,
+    contactEmailFinished?: string | null,
+    stayVaccines?: boolean | null,
+    stayQtd?: number | null,
+    lat?: number | null,
+    lng?: number | null,
+    eligiblesVaccination?:  {
+      __typename: "ModelEligibleVaccinationConnection",
+      nextToken?: string | null,
+    } | null,
+    client?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    clientUnit?:  {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteOSMutationVariables = {
+  input: DeleteOSInput,
+  condition?: ModelOSConditionInput | null,
+};
+
+export type DeleteOSMutation = {
+  deleteOS?:  {
+    __typename: "OS",
+    id: string,
+    clientID: string,
+    clientUnitID: string,
+    driverID?: string | null,
+    professionals: Array< string >,
+    collaborators?: Array< string > | null,
+    number: number,
+    start?: string | null,
+    expiration?: string | null,
+    orientation?: string | null,
+    notes?: string | null,
+    status: OSStatus,
+    allowOffList?: boolean | null,
+    withList?: boolean | null,
+    vaccination?: string | null,
+    qtyApplication?: number | null,
+    dateStarted?: string | null,
+    dateFinished?: string | null,
+    professionalStarted?: string | null,
+    professionalFinished?: string | null,
+    notesStarted?: string | null,
+    notesFinished?: string | null,
+    clientNameStarted?: string | null,
+    clientNameFinished?: string | null,
+    unitNameFinished?: string | null,
+    contactNameFinished?: string | null,
+    contactDocFinished?: string | null,
+    contactCRMFinished?: string | null,
+    contactEmailFinished?: string | null,
+    stayVaccines?: boolean | null,
+    stayQtd?: number | null,
+    lat?: number | null,
+    lng?: number | null,
+    eligiblesVaccination?:  {
+      __typename: "ModelEligibleVaccinationConnection",
+      nextToken?: string | null,
+    } | null,
+    client?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    clientUnit?:  {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -15124,6 +16624,32 @@ export type ListFoldersByNameQuery = {
       id: string,
       name: string,
       createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListNotifyByUserCreatedAtQueryVariables = {
+  userID: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNotifyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListNotifyByUserCreatedAtQuery = {
+  listNotifyByUserCreatedAt?:  {
+    __typename: "ModelNotifyConnection",
+    items:  Array< {
+      __typename: "Notify",
+      id: string,
+      userID: string,
+      createdAt?: string | null,
+      content?: string | null,
+      link?: string | null,
+      viewed?: boolean | null,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -18722,6 +20248,625 @@ export type GetCounterQuery = {
   } | null,
 };
 
+export type ListClientsQueryVariables = {
+  id?: string | null,
+  filter?: ModelClientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListClientsQuery = {
+  listClients?:  {
+    __typename: "ModelClientConnection",
+    items:  Array< {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListClientsByStatusNameQueryVariables = {
+  status: ClientStatus,
+  name?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientsByStatusNameQuery = {
+  listClientsByStatusName?:  {
+    __typename: "ModelClientConnection",
+    items:  Array< {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListClientsByCodeQueryVariables = {
+  code: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientsByCodeQuery = {
+  listClientsByCode?:  {
+    __typename: "ModelClientConnection",
+    items:  Array< {
+      __typename: "Client",
+      id: string,
+      name: string,
+      notes?: string | null,
+      status: ClientStatus,
+      search?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListClientUserByUserQueryVariables = {
+  userID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientUserByUserQuery = {
+  listClientUserByUser?:  {
+    __typename: "ModelClientUserConnection",
+    items:  Array< {
+      __typename: "ClientUser",
+      id: string,
+      userID: string,
+      clientID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListClientUserByClientQueryVariables = {
+  clientID: string,
+  userID?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientUserByClientQuery = {
+  listClientUserByClient?:  {
+    __typename: "ModelClientUserConnection",
+    items:  Array< {
+      __typename: "ClientUser",
+      id: string,
+      userID: string,
+      clientID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListUnitsByClientQueryVariables = {
+  clientID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUnitFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUnitsByClientQuery = {
+  listUnitsByClient?:  {
+    __typename: "ModelClientUnitConnection",
+    items:  Array< {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListUnitsByCodeQueryVariables = {
+  code: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUnitFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUnitsByCodeQuery = {
+  listUnitsByCode?:  {
+    __typename: "ModelClientUnitConnection",
+    items:  Array< {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesByClientQueryVariables = {
+  clientID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientEligibleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesByClientQuery = {
+  listEligiblesByClient?:  {
+    __typename: "ModelClientEligibleConnection",
+    items:  Array< {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesByClientKeyQueryVariables = {
+  clientID: string,
+  key?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientEligibleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesByClientKeyQuery = {
+  listEligiblesByClientKey?:  {
+    __typename: "ModelClientEligibleConnection",
+    items:  Array< {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesByClientCPFQueryVariables = {
+  clientID: string,
+  cpf?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientEligibleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesByClientCPFQuery = {
+  listEligiblesByClientCPF?:  {
+    __typename: "ModelClientEligibleConnection",
+    items:  Array< {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesByClientRGQueryVariables = {
+  clientID: string,
+  rg?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientEligibleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesByClientRGQuery = {
+  listEligiblesByClientRG?:  {
+    __typename: "ModelClientEligibleConnection",
+    items:  Array< {
+      __typename: "ClientEligible",
+      id: string,
+      clientID: string,
+      key: string,
+      name?: string | null,
+      cpf?: string | null,
+      rg?: string | null,
+      birth?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      relationship?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsQueryVariables = {
+  id?: string | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListOSsQuery = {
+  listOSs?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsByClientQueryVariables = {
+  clientID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByClientQuery = {
+  listOSsByClient?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsByClientUnitQueryVariables = {
+  clientUnitID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByClientUnitQuery = {
+  listOSsByClientUnit?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsByNumberQueryVariables = {
+  number: number,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByNumberQuery = {
+  listOSsByNumber?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsByStatusNumberQueryVariables = {
+  status: OSStatus,
+  number?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByStatusNumberQuery = {
+  listOSsByStatusNumber?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesVaccinationByClientEligibleQueryVariables = {
+  clientEligibleID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEligibleVaccinationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesVaccinationByClientEligibleQuery = {
+  listEligiblesVaccinationByClientEligible?:  {
+    __typename: "ModelEligibleVaccinationConnection",
+    items:  Array< {
+      __typename: "EligibleVaccination",
+      id: string,
+      clientEligibleID: string,
+      profissionalID?: string | null,
+      coren?: string | null,
+      applicationDate?: string | null,
+      reason?: string | null,
+      vaccination?: string | null,
+      status?: EligibleVaccinationStatus | null,
+      localCity?: string | null,
+      localState?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnDeleteRelationLinkSubscriptionVariables = {
   userID?: string | null,
 };
@@ -19087,6 +21232,23 @@ export type OnCreateLogSubscription = {
       createdAt?: string | null,
       updatedAt: string,
     } | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNotifySubscriptionVariables = {
+  userID?: string | null,
+};
+
+export type OnCreateNotifySubscription = {
+  onCreateNotify?:  {
+    __typename: "Notify",
+    id: string,
+    userID: string,
+    createdAt?: string | null,
+    content?: string | null,
+    link?: string | null,
+    viewed?: boolean | null,
     updatedAt: string,
   } | null,
 };

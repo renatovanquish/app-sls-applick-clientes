@@ -48,7 +48,7 @@ const IAClientes: FC<Props> = ({ }) => {
     {user && <ChatWindow
       endpoint="/api/chat/retrieval"
       emptyStateComponent={InfoCard}
-      showIngestForm={false}
+      showIngestForm={true}
       placeholder="Olá, como posso ajudar você hoje?"
     ></ChatWindow>}
 

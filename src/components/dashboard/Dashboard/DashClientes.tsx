@@ -9,7 +9,7 @@ interface Props { }
 const DashClientes: FC<Props> = ({ }) => {
 
   const [customer, setCustomer] = useState({
-    name: 'Nome do Cliente',
+    name: 'Cliente Teste',
   } as any)
 
   return (<div className=''>
