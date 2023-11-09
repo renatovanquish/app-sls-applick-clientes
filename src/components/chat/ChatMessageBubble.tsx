@@ -12,7 +12,7 @@ export function ChatMessageBubble(props: { message: Message, sources: any[] }) {
 
   return (
     <div
-      className={`${alignmentClassName} rounded flex items-start my-4`}
+      className={`${alignmentClassName} rounded flex items-start`}
     >
       {props.message.role === "assistant" && <div style={{ minWidth: 64 }}>
         <Image
