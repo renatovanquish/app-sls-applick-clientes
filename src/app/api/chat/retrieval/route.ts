@@ -37,7 +37,7 @@ const formatVercelMessages = (chatHistory: VercelChatMessage[]) => {
   return formattedDialogueTurns.join("\n");
 };
 
-const CONDENSE_QUESTION_TEMPLATE = `Use sempre o idioma portugues
+const CONDENSE_QUESTION_TEMPLATE = `Apenas responda as perguntas, sempre no idioma portugues.
 
 <chat_history>
   {chat_history}

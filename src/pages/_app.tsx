@@ -62,6 +62,8 @@ interface Props {
   children?: React.ReactNode
 }
 
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
+
 const Noop: FC<Props> = ({ children }) => <>{children}</>
 
 export default function AppSls({ Component, pageProps }: AppProps) {
@@ -101,6 +103,20 @@ export default function AppSls({ Component, pageProps }: AppProps) {
           </ManagedUIContext>
         </ManagedUserAuthContext>
       </ThemeProvider>
+
+      <FloatingWhatsApp
+        buttonStyle={{ marginBottom: 20, marginRight: 10 }}
+        phoneNumber="+5511930948120"
+        accountName="Mauro"
+        avatar="/whatsapp/applick.png"
+        allowEsc
+        allowClickAway
+        notification={false}
+        notificationSound={false}
+        statusMessage="Equipe Applick"
+        chatMessage="Olá, como posso ajudar?"
+        placeholder="Digite uma mensagem"
+      />
     </div>
   )
 }
