@@ -34,12 +34,55 @@ export default function ClientUpdateForm(props) {
     notes: "",
     status: "",
     search: "",
+    totalUnits: "",
+    unitsServed: "",
+    unitsExpected: "",
+    firstOSDate: "",
+    lastOSDate: "",
+    scheduleRouted: "",
+    scheduleConfirmed: "",
+    schedulePending: "",
+    totalEligibles: "",
+    totalVaccinations: "",
+    totalVaccinationsExpected: "",
+    PercentAdherence: "",
     code: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [notes, setNotes] = React.useState(initialValues.notes);
   const [status, setStatus] = React.useState(initialValues.status);
   const [search, setSearch] = React.useState(initialValues.search);
+  const [totalUnits, setTotalUnits] = React.useState(initialValues.totalUnits);
+  const [unitsServed, setUnitsServed] = React.useState(
+    initialValues.unitsServed
+  );
+  const [unitsExpected, setUnitsExpected] = React.useState(
+    initialValues.unitsExpected
+  );
+  const [firstOSDate, setFirstOSDate] = React.useState(
+    initialValues.firstOSDate
+  );
+  const [lastOSDate, setLastOSDate] = React.useState(initialValues.lastOSDate);
+  const [scheduleRouted, setScheduleRouted] = React.useState(
+    initialValues.scheduleRouted
+  );
+  const [scheduleConfirmed, setScheduleConfirmed] = React.useState(
+    initialValues.scheduleConfirmed
+  );
+  const [schedulePending, setSchedulePending] = React.useState(
+    initialValues.schedulePending
+  );
+  const [totalEligibles, setTotalEligibles] = React.useState(
+    initialValues.totalEligibles
+  );
+  const [totalVaccinations, setTotalVaccinations] = React.useState(
+    initialValues.totalVaccinations
+  );
+  const [totalVaccinationsExpected, setTotalVaccinationsExpected] =
+    React.useState(initialValues.totalVaccinationsExpected);
+  const [PercentAdherence, setPercentAdherence] = React.useState(
+    initialValues.PercentAdherence
+  );
   const [code, setCode] = React.useState(initialValues.code);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -50,6 +93,18 @@ export default function ClientUpdateForm(props) {
     setNotes(cleanValues.notes);
     setStatus(cleanValues.status);
     setSearch(cleanValues.search);
+    setTotalUnits(cleanValues.totalUnits);
+    setUnitsServed(cleanValues.unitsServed);
+    setUnitsExpected(cleanValues.unitsExpected);
+    setFirstOSDate(cleanValues.firstOSDate);
+    setLastOSDate(cleanValues.lastOSDate);
+    setScheduleRouted(cleanValues.scheduleRouted);
+    setScheduleConfirmed(cleanValues.scheduleConfirmed);
+    setSchedulePending(cleanValues.schedulePending);
+    setTotalEligibles(cleanValues.totalEligibles);
+    setTotalVaccinations(cleanValues.totalVaccinations);
+    setTotalVaccinationsExpected(cleanValues.totalVaccinationsExpected);
+    setPercentAdherence(cleanValues.PercentAdherence);
     setCode(cleanValues.code);
     setErrors({});
   };
@@ -74,6 +129,18 @@ export default function ClientUpdateForm(props) {
     notes: [],
     status: [{ type: "Required" }],
     search: [],
+    totalUnits: [],
+    unitsServed: [],
+    unitsExpected: [],
+    firstOSDate: [],
+    lastOSDate: [],
+    scheduleRouted: [],
+    scheduleConfirmed: [],
+    schedulePending: [],
+    totalEligibles: [],
+    totalVaccinations: [],
+    totalVaccinationsExpected: [],
+    PercentAdherence: [],
     code: [],
   };
   const runValidationTasks = async (
@@ -106,6 +173,18 @@ export default function ClientUpdateForm(props) {
           notes: notes ?? null,
           status,
           search: search ?? null,
+          totalUnits: totalUnits ?? null,
+          unitsServed: unitsServed ?? null,
+          unitsExpected: unitsExpected ?? null,
+          firstOSDate: firstOSDate ?? null,
+          lastOSDate: lastOSDate ?? null,
+          scheduleRouted: scheduleRouted ?? null,
+          scheduleConfirmed: scheduleConfirmed ?? null,
+          schedulePending: schedulePending ?? null,
+          totalEligibles: totalEligibles ?? null,
+          totalVaccinations: totalVaccinations ?? null,
+          totalVaccinationsExpected: totalVaccinationsExpected ?? null,
+          PercentAdherence: PercentAdherence ?? null,
           code: code ?? null,
         };
         const validationResponses = await Promise.all(
@@ -171,6 +250,18 @@ export default function ClientUpdateForm(props) {
               notes,
               status,
               search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -199,6 +290,18 @@ export default function ClientUpdateForm(props) {
               notes: value,
               status,
               search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -227,6 +330,18 @@ export default function ClientUpdateForm(props) {
               notes,
               status: value,
               search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -266,6 +381,18 @@ export default function ClientUpdateForm(props) {
               notes,
               status,
               search: value,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -282,6 +409,537 @@ export default function ClientUpdateForm(props) {
         {...getOverrideProps(overrides, "search")}
       ></TextField>
       <TextField
+        label="Total units"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={totalUnits}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits: value,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.totalUnits ?? value;
+          }
+          if (errors.totalUnits?.hasError) {
+            runValidationTasks("totalUnits", value);
+          }
+          setTotalUnits(value);
+        }}
+        onBlur={() => runValidationTasks("totalUnits", totalUnits)}
+        errorMessage={errors.totalUnits?.errorMessage}
+        hasError={errors.totalUnits?.hasError}
+        {...getOverrideProps(overrides, "totalUnits")}
+      ></TextField>
+      <TextField
+        label="Units served"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={unitsServed}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed: value,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.unitsServed ?? value;
+          }
+          if (errors.unitsServed?.hasError) {
+            runValidationTasks("unitsServed", value);
+          }
+          setUnitsServed(value);
+        }}
+        onBlur={() => runValidationTasks("unitsServed", unitsServed)}
+        errorMessage={errors.unitsServed?.errorMessage}
+        hasError={errors.unitsServed?.hasError}
+        {...getOverrideProps(overrides, "unitsServed")}
+      ></TextField>
+      <TextField
+        label="Units expected"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={unitsExpected}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected: value,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.unitsExpected ?? value;
+          }
+          if (errors.unitsExpected?.hasError) {
+            runValidationTasks("unitsExpected", value);
+          }
+          setUnitsExpected(value);
+        }}
+        onBlur={() => runValidationTasks("unitsExpected", unitsExpected)}
+        errorMessage={errors.unitsExpected?.errorMessage}
+        hasError={errors.unitsExpected?.hasError}
+        {...getOverrideProps(overrides, "unitsExpected")}
+      ></TextField>
+      <TextField
+        label="First os date"
+        isRequired={false}
+        isReadOnly={false}
+        type="date"
+        value={firstOSDate}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate: value,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.firstOSDate ?? value;
+          }
+          if (errors.firstOSDate?.hasError) {
+            runValidationTasks("firstOSDate", value);
+          }
+          setFirstOSDate(value);
+        }}
+        onBlur={() => runValidationTasks("firstOSDate", firstOSDate)}
+        errorMessage={errors.firstOSDate?.errorMessage}
+        hasError={errors.firstOSDate?.hasError}
+        {...getOverrideProps(overrides, "firstOSDate")}
+      ></TextField>
+      <TextField
+        label="Last os date"
+        isRequired={false}
+        isReadOnly={false}
+        type="date"
+        value={lastOSDate}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate: value,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.lastOSDate ?? value;
+          }
+          if (errors.lastOSDate?.hasError) {
+            runValidationTasks("lastOSDate", value);
+          }
+          setLastOSDate(value);
+        }}
+        onBlur={() => runValidationTasks("lastOSDate", lastOSDate)}
+        errorMessage={errors.lastOSDate?.errorMessage}
+        hasError={errors.lastOSDate?.hasError}
+        {...getOverrideProps(overrides, "lastOSDate")}
+      ></TextField>
+      <TextField
+        label="Schedule routed"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={scheduleRouted}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted: value,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.scheduleRouted ?? value;
+          }
+          if (errors.scheduleRouted?.hasError) {
+            runValidationTasks("scheduleRouted", value);
+          }
+          setScheduleRouted(value);
+        }}
+        onBlur={() => runValidationTasks("scheduleRouted", scheduleRouted)}
+        errorMessage={errors.scheduleRouted?.errorMessage}
+        hasError={errors.scheduleRouted?.hasError}
+        {...getOverrideProps(overrides, "scheduleRouted")}
+      ></TextField>
+      <TextField
+        label="Schedule confirmed"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={scheduleConfirmed}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed: value,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.scheduleConfirmed ?? value;
+          }
+          if (errors.scheduleConfirmed?.hasError) {
+            runValidationTasks("scheduleConfirmed", value);
+          }
+          setScheduleConfirmed(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("scheduleConfirmed", scheduleConfirmed)
+        }
+        errorMessage={errors.scheduleConfirmed?.errorMessage}
+        hasError={errors.scheduleConfirmed?.hasError}
+        {...getOverrideProps(overrides, "scheduleConfirmed")}
+      ></TextField>
+      <TextField
+        label="Schedule pending"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={schedulePending}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending: value,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.schedulePending ?? value;
+          }
+          if (errors.schedulePending?.hasError) {
+            runValidationTasks("schedulePending", value);
+          }
+          setSchedulePending(value);
+        }}
+        onBlur={() => runValidationTasks("schedulePending", schedulePending)}
+        errorMessage={errors.schedulePending?.errorMessage}
+        hasError={errors.schedulePending?.hasError}
+        {...getOverrideProps(overrides, "schedulePending")}
+      ></TextField>
+      <TextField
+        label="Total eligibles"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={totalEligibles}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles: value,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.totalEligibles ?? value;
+          }
+          if (errors.totalEligibles?.hasError) {
+            runValidationTasks("totalEligibles", value);
+          }
+          setTotalEligibles(value);
+        }}
+        onBlur={() => runValidationTasks("totalEligibles", totalEligibles)}
+        errorMessage={errors.totalEligibles?.errorMessage}
+        hasError={errors.totalEligibles?.hasError}
+        {...getOverrideProps(overrides, "totalEligibles")}
+      ></TextField>
+      <TextField
+        label="Total vaccinations"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={totalVaccinations}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations: value,
+              totalVaccinationsExpected,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.totalVaccinations ?? value;
+          }
+          if (errors.totalVaccinations?.hasError) {
+            runValidationTasks("totalVaccinations", value);
+          }
+          setTotalVaccinations(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("totalVaccinations", totalVaccinations)
+        }
+        errorMessage={errors.totalVaccinations?.errorMessage}
+        hasError={errors.totalVaccinations?.hasError}
+        {...getOverrideProps(overrides, "totalVaccinations")}
+      ></TextField>
+      <TextField
+        label="Total vaccinations expected"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={totalVaccinationsExpected}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected: value,
+              PercentAdherence,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.totalVaccinationsExpected ?? value;
+          }
+          if (errors.totalVaccinationsExpected?.hasError) {
+            runValidationTasks("totalVaccinationsExpected", value);
+          }
+          setTotalVaccinationsExpected(value);
+        }}
+        onBlur={() =>
+          runValidationTasks(
+            "totalVaccinationsExpected",
+            totalVaccinationsExpected
+          )
+        }
+        errorMessage={errors.totalVaccinationsExpected?.errorMessage}
+        hasError={errors.totalVaccinationsExpected?.hasError}
+        {...getOverrideProps(overrides, "totalVaccinationsExpected")}
+      ></TextField>
+      <TextField
+        label="Percent adherence"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={PercentAdherence}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              notes,
+              status,
+              search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence: value,
+              code,
+            };
+            const result = onChange(modelFields);
+            value = result?.PercentAdherence ?? value;
+          }
+          if (errors.PercentAdherence?.hasError) {
+            runValidationTasks("PercentAdherence", value);
+          }
+          setPercentAdherence(value);
+        }}
+        onBlur={() => runValidationTasks("PercentAdherence", PercentAdherence)}
+        errorMessage={errors.PercentAdherence?.errorMessage}
+        hasError={errors.PercentAdherence?.hasError}
+        {...getOverrideProps(overrides, "PercentAdherence")}
+      ></TextField>
+      <TextField
         label="Code"
         isRequired={false}
         isReadOnly={false}
@@ -294,6 +952,18 @@ export default function ClientUpdateForm(props) {
               notes,
               status,
               search,
+              totalUnits,
+              unitsServed,
+              unitsExpected,
+              firstOSDate,
+              lastOSDate,
+              scheduleRouted,
+              scheduleConfirmed,
+              schedulePending,
+              totalEligibles,
+              totalVaccinations,
+              totalVaccinationsExpected,
+              PercentAdherence,
               code: value,
             };
             const result = onChange(modelFields);

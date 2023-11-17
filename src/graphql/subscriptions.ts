@@ -332,7 +332,7 @@ export const onCreateOrderAdm = /* GraphQL */ `subscription OnCreateOrderAdm {
   }
 }
 ` as GeneratedSubscription<
-  any,
+  APITypes.OnCreateOrderAdmSubscriptionVariables,
   APITypes.OnCreateOrderAdmSubscription
 >;
 export const onCreateLog = /* GraphQL */ `subscription OnCreateLog {
@@ -376,7 +376,7 @@ export const onCreateLog = /* GraphQL */ `subscription OnCreateLog {
   }
 }
 ` as GeneratedSubscription<
-  any,
+  APITypes.OnCreateLogSubscriptionVariables,
   APITypes.OnCreateLogSubscription
 >;
 export const onCreateNotify = /* GraphQL */ `subscription OnCreateNotify($userID: ID) {
@@ -394,6 +394,47 @@ export const onCreateNotify = /* GraphQL */ `subscription OnCreateNotify($userID
 ` as GeneratedSubscription<
   APITypes.OnCreateNotifySubscriptionVariables,
   APITypes.OnCreateNotifySubscription
+>;
+export const onUpdateClient = /* GraphQL */ `subscription OnUpdateClient($clientID: ID) {
+  onUpdateClient(clientID: $clientID) {
+    id
+    name
+    notes
+    status
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    totalVaccinationsExpected
+    PercentAdherence
+    code
+    units {
+      nextToken
+      __typename
+    }
+    eligibles {
+      nextToken
+      __typename
+    }
+    oss {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateClientSubscriptionVariables,
+  APITypes.OnUpdateClientSubscription
 >;
 export const onCreateCart = /* GraphQL */ `subscription OnCreateCart(
   $filter: ModelSubscriptionCartFilterInput

@@ -5085,6 +5085,18 @@ export const listClients = /* GraphQL */ `query ListClients(
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -5120,6 +5132,18 @@ export const listClientsByStatusName = /* GraphQL */ `query ListClientsByStatusN
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -5153,6 +5177,18 @@ export const listClientsByCode = /* GraphQL */ `query ListClientsByCode(
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt

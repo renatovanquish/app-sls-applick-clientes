@@ -26,6 +26,18 @@ export declare type ClientCreateFormInputValues = {
     notes?: string;
     status?: string;
     search?: string;
+    totalUnits?: number;
+    unitsServed?: number;
+    unitsExpected?: number;
+    firstOSDate?: string;
+    lastOSDate?: string;
+    scheduleRouted?: number;
+    scheduleConfirmed?: number;
+    schedulePending?: number;
+    totalEligibles?: number;
+    totalVaccinations?: number;
+    totalVaccinationsExpected?: number;
+    PercentAdherence?: number;
     code?: string;
 };
 export declare type ClientCreateFormValidationValues = {
@@ -33,6 +45,18 @@ export declare type ClientCreateFormValidationValues = {
     notes?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     search?: ValidationFunction<string>;
+    totalUnits?: ValidationFunction<number>;
+    unitsServed?: ValidationFunction<number>;
+    unitsExpected?: ValidationFunction<number>;
+    firstOSDate?: ValidationFunction<string>;
+    lastOSDate?: ValidationFunction<string>;
+    scheduleRouted?: ValidationFunction<number>;
+    scheduleConfirmed?: ValidationFunction<number>;
+    schedulePending?: ValidationFunction<number>;
+    totalEligibles?: ValidationFunction<number>;
+    totalVaccinations?: ValidationFunction<number>;
+    totalVaccinationsExpected?: ValidationFunction<number>;
+    PercentAdherence?: ValidationFunction<number>;
     code?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -42,6 +66,18 @@ export declare type ClientCreateFormOverridesProps = {
     notes?: PrimitiveOverrideProps<TextFieldProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
     search?: PrimitiveOverrideProps<TextFieldProps>;
+    totalUnits?: PrimitiveOverrideProps<TextFieldProps>;
+    unitsServed?: PrimitiveOverrideProps<TextFieldProps>;
+    unitsExpected?: PrimitiveOverrideProps<TextFieldProps>;
+    firstOSDate?: PrimitiveOverrideProps<TextFieldProps>;
+    lastOSDate?: PrimitiveOverrideProps<TextFieldProps>;
+    scheduleRouted?: PrimitiveOverrideProps<TextFieldProps>;
+    scheduleConfirmed?: PrimitiveOverrideProps<TextFieldProps>;
+    schedulePending?: PrimitiveOverrideProps<TextFieldProps>;
+    totalEligibles?: PrimitiveOverrideProps<TextFieldProps>;
+    totalVaccinations?: PrimitiveOverrideProps<TextFieldProps>;
+    totalVaccinationsExpected?: PrimitiveOverrideProps<TextFieldProps>;
+    PercentAdherence?: PrimitiveOverrideProps<TextFieldProps>;
     code?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ClientCreateFormProps = React.PropsWithChildren<{

@@ -965,6 +965,7 @@ type Subscription {
   onCreateOrderAdm: Order @aws_subscribe(mutations: ["createOrder"])
   onCreateLog: Log @aws_subscribe(mutations: ["createLog"])
   onCreateNotify(userID: ID): Notify @aws_subscribe(mutations: ["createNotify"])
+  onUpdateClient(clientID: ID): Client @aws_subscribe(mutations: ["updateClient"])
 }
 
 type Mutation @aws_api_key @aws_cognito_user_pools {
@@ -1306,6 +1307,18 @@ type Client
   notes: String
   status: ClientStatus! @index(name: "clientsByStatusName", queryField: "listClientsByStatusName", sortKeyFields: ["name"])
   search: String
+  totalUnits: Int
+  unitsServed: Int
+  unitsExpected: Int
+  firstOSDate: AWSDate
+  lastOSDate: AWSDate
+  scheduleRouted: Int
+  scheduleConfirmed: Int
+  schedulePending: Int
+  totalEligibles: Int
+  totalVaccinations: Int
+  totalVaccinationsExpected: Int
+  PercentAdherence: Float
   code: String @index(name: "clientsByCode", queryField: "listClientsByCode")
   units: [ClientUnit] @hasMany(indexName: "unitsByClient", fields: ["id"])
   eligibles: [ClientEligible] @hasMany(indexName: "eligiblesByClient", fields: ["id"])
@@ -1397,6 +1410,8 @@ enum OSStatus {
   STANDBY
   STARTED
   FINISHED
+  CONFIRMED
+  CANCELED
 }
 
 type OS

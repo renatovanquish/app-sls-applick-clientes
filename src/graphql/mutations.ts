@@ -3250,6 +3250,18 @@ export const createClient = /* GraphQL */ `mutation CreateClient(
     notes
     status
     search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    totalVaccinationsExpected
+    PercentAdherence
     code
     units {
       nextToken
@@ -3282,6 +3294,18 @@ export const updateClient = /* GraphQL */ `mutation UpdateClient(
     notes
     status
     search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    totalVaccinationsExpected
+    PercentAdherence
     code
     units {
       nextToken
@@ -3314,6 +3338,18 @@ export const deleteClient = /* GraphQL */ `mutation DeleteClient(
     notes
     status
     search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    totalVaccinationsExpected
+    PercentAdherence
     code
     units {
       nextToken
@@ -6755,6 +6791,18 @@ export const createClientUser = /* GraphQL */ `mutation CreateClientUser(
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6796,6 +6844,18 @@ export const deleteClientUser = /* GraphQL */ `mutation DeleteClientUser(
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6855,6 +6915,18 @@ export const createOS = /* GraphQL */ `mutation CreateOS($input: CreateOSInput!,
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6936,6 +7008,18 @@ export const updateOS = /* GraphQL */ `mutation UpdateOS($input: UpdateOSInput!,
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
@@ -7017,6 +7101,18 @@ export const deleteOS = /* GraphQL */ `mutation DeleteOS($input: DeleteOSInput!,
       notes
       status
       search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      totalVaccinationsExpected
+      PercentAdherence
       code
       createdAt
       updatedAt
