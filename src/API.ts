@@ -1874,6 +1874,7 @@ export enum OSStatus {
   FINISHED = "FINISHED",
   CONFIRMED = "CONFIRMED",
   CANCELED = "CANCELED",
+  ROUTED = "ROUTED",
 }
 
 
@@ -9337,6 +9338,49 @@ export type ListClientUserByClientCustomQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListClientUserByUserCustomQueryVariables = {
+  userID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientUserByUserCustomQuery = {
+  listClientUserByUser?:  {
+    __typename: "ModelClientUserConnection",
+    items:  Array< {
+      __typename: "ClientUser",
+      id: string,
+      userID: string,
+      clientID: string,
+      createdAt: string,
+      updatedAt: string,
+      client?:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        notes?: string | null,
+        status: ClientStatus,
+        search?: string | null,
+        totalUnits?: number | null,
+        unitsServed?: number | null,
+        unitsExpected?: number | null,
+        firstOSDate?: string | null,
+        lastOSDate?: string | null,
+        scheduleRouted?: number | null,
+        scheduleConfirmed?: number | null,
+        schedulePending?: number | null,
+        totalEligibles?: number | null,
+        totalVaccinations?: number | null,
+        totalVaccinationsExpected?: number | null,
+        PercentAdherence?: number | null,
+      } | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -20680,6 +20724,48 @@ export type GetCounterQuery = {
     __typename: "Counter",
     id: string,
     qty: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetClientQueryVariables = {
+  id: string,
+};
+
+export type GetClientQuery = {
+  getClient?:  {
+    __typename: "Client",
+    id: string,
+    name: string,
+    notes?: string | null,
+    status: ClientStatus,
+    search?: string | null,
+    totalUnits?: number | null,
+    unitsServed?: number | null,
+    unitsExpected?: number | null,
+    firstOSDate?: string | null,
+    lastOSDate?: string | null,
+    scheduleRouted?: number | null,
+    scheduleConfirmed?: number | null,
+    schedulePending?: number | null,
+    totalEligibles?: number | null,
+    totalVaccinations?: number | null,
+    totalVaccinationsExpected?: number | null,
+    PercentAdherence?: number | null,
+    code?: string | null,
+    units?:  {
+      __typename: "ModelClientUnitConnection",
+      nextToken?: string | null,
+    } | null,
+    eligibles?:  {
+      __typename: "ModelClientEligibleConnection",
+      nextToken?: string | null,
+    } | null,
+    oss?:  {
+      __typename: "ModelOSConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,

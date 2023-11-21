@@ -6,6 +6,7 @@ import * as queries from 'graphql/queries'
 import * as mutations from 'graphql/mutations'
 
 import {
+  GetClientQueryVariables,
   CreateClientInput,
   UpdateClientInput,
   DeleteClientInput,
@@ -16,6 +17,15 @@ import {
 } from 'API'
 
 export const useClient = () => {
+  const getClient = async (variables: GetClientQueryVariables) => {
+    const {
+      data: { getClient },
+    } = (await API.graphql(
+      graphqlOperation(queries.getClient, variables)
+    )) as GraphQLResult<any>
+    return getClient
+  }
+
   const createClient = async (input: CreateClientInput) => {
     const {
       data: { createClient },
@@ -94,6 +104,7 @@ export const useClient = () => {
   }
 
   return {
+    getClient,
     createClient,
     updateClient,
     deleteClient,

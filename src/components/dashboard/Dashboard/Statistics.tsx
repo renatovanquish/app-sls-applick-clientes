@@ -10,6 +10,8 @@ import { GraphQLSubscription, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import * as subscriptions from 'graphql/subscriptions';
 import { OnUpdateClientSubscription } from 'API';
 
+import { useClient } from 'hooks/useClient'
+
 import 'moment/locale/pt-br'
 import Moment from 'moment'
 Moment.locale('pt-br')
@@ -17,11 +19,14 @@ Moment.locale('pt-br')
 export default function Statistics(props: any) {
   const [client, setClient] = useState<any>();
 
-  const handleClient = (c: any) => {
-    c.percentServed = c.totalUnits ? Math.round((c.unitsServed / c.totalUnits) * 100) : 0
-    c.progressUnits = 0
-    c.progressVaccinations = 0
-    setClient(c)
+  const { getClient } = useClient()
+
+  const handleClient = async (c: any) => {
+    const cli = await getClient({ id: c.id })
+    cli.percentServed = c.totalUnits ? Math.round((c.unitsServed / c.totalUnits) * 100) : 0
+    cli.progressUnits = 0
+    cli.progressVaccinations = 0
+    setClient(cli)
   }
 
   useEffect(() => {

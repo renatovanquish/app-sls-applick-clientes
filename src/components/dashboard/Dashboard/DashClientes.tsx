@@ -15,6 +15,7 @@ const DashClientes: FC<Props> = ({ }) => {
   const [checked, setChecked] = useState(false)
   const [clients, setClients] = useState([] as any)
   const [client, setClient] = useState({} as any)
+  const [clientID, setClientID] = useState('')
 
   const { listClientUserByUser } = useClientUser()
 
@@ -64,10 +65,12 @@ const DashClientes: FC<Props> = ({ }) => {
 
   const SelectClient = () => (<div style={{ maxWidth: 300 }} className='mx-auto'>
     <select
+      value={clientID}
       onChange={(e) => {
-        const clientID = e.target.value
-        const c = clients.filter((client: any) => client.id === clientID)
+        const id = e.target.value
+        const c = clients.filter((client: any) => client.id === id)
         setClient(c[0])
+        setClientID(id)
       }}
       placeholder="Selecione..."
       className="text-accent-9 bg-accent-1 w-full rounded-lg border-2 border-accent-2 outline-none focus:border-indigo-500"

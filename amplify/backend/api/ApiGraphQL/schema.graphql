@@ -1295,7 +1295,7 @@ enum ClientStatus {
 type Client
   @model(
     mutations: {create: "createClient", update: "updateClient", delete: "deleteClient"},
-    queries: {get: null, list: "listClients"},
+    queries: {get: "getClient", list: "listClients"},
     subscriptions: null
     )
   @auth(rules: [
@@ -1331,6 +1331,7 @@ type ClientUser
     queries: {get: null, list: null},
     subscriptions: null)
   @auth(rules: [
+    {allow: groups, provider: userPools, groups: ["Admin"], operations: [create, update, delete, read]},
     {allow: owner, identityClaim: "username", provider: userPools, ownerField: "userID"},
     {allow: public, provider: apiKey, operations: [create, delete, update, read]}
   ]) {
@@ -1412,6 +1413,7 @@ enum OSStatus {
   FINISHED
   CONFIRMED
   CANCELED
+  ROUTED
 }
 
 type OS

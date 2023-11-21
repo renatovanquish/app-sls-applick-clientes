@@ -5065,6 +5065,44 @@ export const getCounter = /* GraphQL */ `query GetCounter($id: String!) {
   APITypes.GetCounterQueryVariables,
   APITypes.GetCounterQuery
 >;
+export const getClient = /* GraphQL */ `query GetClient($id: ID!) {
+  getClient(id: $id) {
+    id
+    name
+    notes
+    status
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    totalVaccinationsExpected
+    PercentAdherence
+    code
+    units {
+      nextToken
+      __typename
+    }
+    eligibles {
+      nextToken
+      __typename
+    }
+    oss {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetClientQueryVariables, APITypes.GetClientQuery>;
 export const listClients = /* GraphQL */ `query ListClients(
   $id: ID
   $filter: ModelClientFilterInput
