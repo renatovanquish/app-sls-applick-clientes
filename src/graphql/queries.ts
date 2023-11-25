@@ -5082,7 +5082,6 @@ export const getClient = /* GraphQL */ `query GetClient($id: ID!) {
     schedulePending
     totalEligibles
     totalVaccinations
-    totalVaccinationsExpected
     PercentAdherence
     code
     units {
@@ -5133,7 +5132,6 @@ export const listClients = /* GraphQL */ `query ListClients(
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -5180,7 +5178,6 @@ export const listClientsByStatusName = /* GraphQL */ `query ListClientsByStatusN
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -5225,7 +5222,6 @@ export const listClientsByCode = /* GraphQL */ `query ListClientsByCode(
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -5843,6 +5839,44 @@ export const listOSsByStatusNumber = /* GraphQL */ `query ListOSsByStatusNumber(
   APITypes.ListOSsByStatusNumberQueryVariables,
   APITypes.ListOSsByStatusNumberQuery
 >;
+export const listEligiblesVaccinationByOS = /* GraphQL */ `query ListEligiblesVaccinationByOS(
+  $osID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelEligibleVaccinationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEligiblesVaccinationByOS(
+    osID: $osID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      osID
+      clientEligibleID
+      profissionalID
+      coren
+      applicationDate
+      reason
+      vaccination
+      status
+      localCity
+      localState
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListEligiblesVaccinationByOSQueryVariables,
+  APITypes.ListEligiblesVaccinationByOSQuery
+>;
 export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query ListEligiblesVaccinationByClientEligible(
   $clientEligibleID: ID!
   $sortDirection: ModelSortDirection
@@ -5859,6 +5893,7 @@ export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query Lis
   ) {
     items {
       id
+      osID
       clientEligibleID
       profissionalID
       coren

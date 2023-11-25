@@ -3260,7 +3260,6 @@ export const createClient = /* GraphQL */ `mutation CreateClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    totalVaccinationsExpected
     PercentAdherence
     code
     units {
@@ -3304,7 +3303,6 @@ export const updateClient = /* GraphQL */ `mutation UpdateClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    totalVaccinationsExpected
     PercentAdherence
     code
     units {
@@ -3348,7 +3346,6 @@ export const deleteClient = /* GraphQL */ `mutation DeleteClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    totalVaccinationsExpected
     PercentAdherence
     code
     units {
@@ -3555,6 +3552,7 @@ export const createEligibleVaccination = /* GraphQL */ `mutation CreateEligibleV
 ) {
   createEligibleVaccination(input: $input, condition: $condition) {
     id
+    osID
     clientEligibleID
     clientEligible {
       id
@@ -3607,6 +3605,7 @@ export const updateEligibleVaccination = /* GraphQL */ `mutation UpdateEligibleV
 ) {
   updateEligibleVaccination(input: $input, condition: $condition) {
     id
+    osID
     clientEligibleID
     clientEligible {
       id
@@ -3659,6 +3658,7 @@ export const deleteEligibleVaccination = /* GraphQL */ `mutation DeleteEligibleV
 ) {
   deleteEligibleVaccination(input: $input, condition: $condition) {
     id
+    osID
     clientEligibleID
     clientEligible {
       id
@@ -6801,7 +6801,6 @@ export const createClientUser = /* GraphQL */ `mutation CreateClientUser(
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -6854,7 +6853,6 @@ export const deleteClientUser = /* GraphQL */ `mutation DeleteClientUser(
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -6925,7 +6923,6 @@ export const createOS = /* GraphQL */ `mutation CreateOS($input: CreateOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -7018,7 +7015,6 @@ export const updateOS = /* GraphQL */ `mutation UpdateOS($input: UpdateOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt
@@ -7111,7 +7107,6 @@ export const deleteOS = /* GraphQL */ `mutation DeleteOS($input: DeleteOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       code
       createdAt

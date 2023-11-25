@@ -1317,7 +1317,6 @@ type Client
   schedulePending: Int
   totalEligibles: Int
   totalVaccinations: Int
-  totalVaccinationsExpected: Int
   PercentAdherence: Float
   code: String @index(name: "clientsByCode", queryField: "listClientsByCode")
   units: [ClientUnit] @hasMany(indexName: "unitsByClient", fields: ["id"])
@@ -1480,6 +1479,7 @@ type EligibleVaccination
     {allow: public, provider: apiKey, operations: [read]}
   ]) {
   id: ID! @primaryKey
+  osID: ID! @index(name: "eligiblesVaccinationByOS", queryField: "listEligiblesVaccinationByOS")
   clientEligibleID: ID! @index(name: "eligiblesVaccinationByClientEligible", queryField: "listEligiblesVaccinationByClientEligible")
   clientEligible: ClientEligible @hasOne(fields: ["clientEligibleID"])
   profissionalID: ID

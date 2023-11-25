@@ -412,7 +412,6 @@ export const onUpdateClient = /* GraphQL */ `subscription OnUpdateClient($client
     schedulePending
     totalEligibles
     totalVaccinations
-    totalVaccinationsExpected
     PercentAdherence
     code
     units {

@@ -3979,7 +3979,6 @@ export const listClientUserByUser = /* GraphQL */ `query ListClientUserByUserCus
       schedulePending
       totalEligibles
       totalVaccinations
-      totalVaccinationsExpected
       PercentAdherence
       }
     }

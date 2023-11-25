@@ -1935,6 +1935,7 @@ export type ModelEligibleVaccinationConnection = {
 export type EligibleVaccination = {
   __typename: "EligibleVaccination",
   id: string,
+  osID: string,
   clientEligibleID: string,
   clientEligible?: ClientEligible | null,
   profissionalID?: string | null,
@@ -1989,7 +1990,6 @@ export type Client = {
   schedulePending?: number | null,
   totalEligibles?: number | null,
   totalVaccinations?: number | null,
-  totalVaccinationsExpected?: number | null,
   PercentAdherence?: number | null,
   code?: string | null,
   units?: ModelClientUnitConnection | null,
@@ -3659,7 +3659,6 @@ export type CreateClientInput = {
   schedulePending?: number | null,
   totalEligibles?: number | null,
   totalVaccinations?: number | null,
-  totalVaccinationsExpected?: number | null,
   PercentAdherence?: number | null,
   code?: string | null,
 };
@@ -3679,7 +3678,6 @@ export type ModelClientConditionInput = {
   schedulePending?: ModelIntInput | null,
   totalEligibles?: ModelIntInput | null,
   totalVaccinations?: ModelIntInput | null,
-  totalVaccinationsExpected?: ModelIntInput | null,
   PercentAdherence?: ModelFloatInput | null,
   code?: ModelStringInput | null,
   and?: Array< ModelClientConditionInput | null > | null,
@@ -3708,7 +3706,6 @@ export type UpdateClientInput = {
   schedulePending?: number | null,
   totalEligibles?: number | null,
   totalVaccinations?: number | null,
-  totalVaccinationsExpected?: number | null,
   PercentAdherence?: number | null,
   code?: string | null,
 };
@@ -3830,6 +3827,7 @@ export type DeleteClientEligibleInput = {
 
 export type CreateEligibleVaccinationInput = {
   id?: string | null,
+  osID: string,
   clientEligibleID: string,
   profissionalID?: string | null,
   coren?: string | null,
@@ -3842,6 +3840,7 @@ export type CreateEligibleVaccinationInput = {
 };
 
 export type ModelEligibleVaccinationConditionInput = {
+  osID?: ModelIDInput | null,
   clientEligibleID?: ModelIDInput | null,
   profissionalID?: ModelIDInput | null,
   coren?: ModelStringInput | null,
@@ -3863,6 +3862,7 @@ export type ModelEligibleVaccinationStatusInput = {
 
 export type UpdateEligibleVaccinationInput = {
   id: string,
+  osID?: string | null,
   clientEligibleID?: string | null,
   profissionalID?: string | null,
   coren?: string | null,
@@ -5137,7 +5137,6 @@ export type ModelClientFilterInput = {
   schedulePending?: ModelIntInput | null,
   totalEligibles?: ModelIntInput | null,
   totalVaccinations?: ModelIntInput | null,
-  totalVaccinationsExpected?: ModelIntInput | null,
   PercentAdherence?: ModelFloatInput | null,
   code?: ModelStringInput | null,
   and?: Array< ModelClientFilterInput | null > | null,
@@ -5192,6 +5191,7 @@ export type ModelClientEligibleFilterInput = {
 
 export type ModelEligibleVaccinationFilterInput = {
   id?: ModelIDInput | null,
+  osID?: ModelIDInput | null,
   clientEligibleID?: ModelIDInput | null,
   profissionalID?: ModelIDInput | null,
   coren?: ModelStringInput | null,
@@ -9378,7 +9378,6 @@ export type ListClientUserByUserCustomQuery = {
         schedulePending?: number | null,
         totalEligibles?: number | null,
         totalVaccinations?: number | null,
-        totalVaccinationsExpected?: number | null,
         PercentAdherence?: number | null,
       } | null,
     } | null >,
@@ -12567,7 +12566,6 @@ export type CreateClientMutation = {
     schedulePending?: number | null,
     totalEligibles?: number | null,
     totalVaccinations?: number | null,
-    totalVaccinationsExpected?: number | null,
     PercentAdherence?: number | null,
     code?: string | null,
     units?:  {
@@ -12610,7 +12608,6 @@ export type UpdateClientMutation = {
     schedulePending?: number | null,
     totalEligibles?: number | null,
     totalVaccinations?: number | null,
-    totalVaccinationsExpected?: number | null,
     PercentAdherence?: number | null,
     code?: string | null,
     units?:  {
@@ -12653,7 +12650,6 @@ export type DeleteClientMutation = {
     schedulePending?: number | null,
     totalEligibles?: number | null,
     totalVaccinations?: number | null,
-    totalVaccinationsExpected?: number | null,
     PercentAdherence?: number | null,
     code?: string | null,
     units?:  {
@@ -12853,6 +12849,7 @@ export type CreateEligibleVaccinationMutation = {
   createEligibleVaccination?:  {
     __typename: "EligibleVaccination",
     id: string,
+    osID: string,
     clientEligibleID: string,
     clientEligible?:  {
       __typename: "ClientEligible",
@@ -12904,6 +12901,7 @@ export type UpdateEligibleVaccinationMutation = {
   updateEligibleVaccination?:  {
     __typename: "EligibleVaccination",
     id: string,
+    osID: string,
     clientEligibleID: string,
     clientEligible?:  {
       __typename: "ClientEligible",
@@ -12955,6 +12953,7 @@ export type DeleteEligibleVaccinationMutation = {
   deleteEligibleVaccination?:  {
     __typename: "EligibleVaccination",
     id: string,
+    osID: string,
     clientEligibleID: string,
     clientEligible?:  {
       __typename: "ClientEligible",
@@ -16036,7 +16035,6 @@ export type CreateClientUserMutation = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -16088,7 +16086,6 @@ export type DeleteClientUserMutation = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -16161,7 +16158,6 @@ export type CreateOSMutation = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -16256,7 +16252,6 @@ export type UpdateOSMutation = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -16351,7 +16346,6 @@ export type DeleteOSMutation = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -20751,7 +20745,6 @@ export type GetClientQuery = {
     schedulePending?: number | null,
     totalEligibles?: number | null,
     totalVaccinations?: number | null,
-    totalVaccinationsExpected?: number | null,
     PercentAdherence?: number | null,
     code?: string | null,
     units?:  {
@@ -20799,7 +20792,6 @@ export type ListClientsQuery = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -20838,7 +20830,6 @@ export type ListClientsByStatusNameQuery = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -20876,7 +20867,6 @@ export type ListClientsByCodeQuery = {
       schedulePending?: number | null,
       totalEligibles?: number | null,
       totalVaccinations?: number | null,
-      totalVaccinationsExpected?: number | null,
       PercentAdherence?: number | null,
       code?: string | null,
       createdAt: string,
@@ -21396,6 +21386,37 @@ export type ListOSsByStatusNumberQuery = {
   } | null,
 };
 
+export type ListEligiblesVaccinationByOSQueryVariables = {
+  osID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEligibleVaccinationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesVaccinationByOSQuery = {
+  listEligiblesVaccinationByOS?:  {
+    __typename: "ModelEligibleVaccinationConnection",
+    items:  Array< {
+      __typename: "EligibleVaccination",
+      id: string,
+      osID: string,
+      clientEligibleID: string,
+      profissionalID?: string | null,
+      coren?: string | null,
+      applicationDate?: string | null,
+      reason?: string | null,
+      vaccination?: string | null,
+      status?: EligibleVaccinationStatus | null,
+      localCity?: string | null,
+      localState?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ListEligiblesVaccinationByClientEligibleQueryVariables = {
   clientEligibleID: string,
   sortDirection?: ModelSortDirection | null,
@@ -21410,6 +21431,7 @@ export type ListEligiblesVaccinationByClientEligibleQuery = {
     items:  Array< {
       __typename: "EligibleVaccination",
       id: string,
+      osID: string,
       clientEligibleID: string,
       profissionalID?: string | null,
       coren?: string | null,
@@ -21840,7 +21862,6 @@ export type OnUpdateClientSubscription = {
     schedulePending?: number | null,
     totalEligibles?: number | null,
     totalVaccinations?: number | null,
-    totalVaccinationsExpected?: number | null,
     PercentAdherence?: number | null,
     code?: string | null,
     units?:  {

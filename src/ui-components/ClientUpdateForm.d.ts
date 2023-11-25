@@ -37,7 +37,6 @@ export declare type ClientUpdateFormInputValues = {
     schedulePending?: number;
     totalEligibles?: number;
     totalVaccinations?: number;
-    totalVaccinationsExpected?: number;
     PercentAdherence?: number;
     code?: string;
 };
@@ -56,7 +55,6 @@ export declare type ClientUpdateFormValidationValues = {
     schedulePending?: ValidationFunction<number>;
     totalEligibles?: ValidationFunction<number>;
     totalVaccinations?: ValidationFunction<number>;
-    totalVaccinationsExpected?: ValidationFunction<number>;
     PercentAdherence?: ValidationFunction<number>;
     code?: ValidationFunction<string>;
 };
@@ -77,7 +75,6 @@ export declare type ClientUpdateFormOverridesProps = {
     schedulePending?: PrimitiveOverrideProps<TextFieldProps>;
     totalEligibles?: PrimitiveOverrideProps<TextFieldProps>;
     totalVaccinations?: PrimitiveOverrideProps<TextFieldProps>;
-    totalVaccinationsExpected?: PrimitiveOverrideProps<TextFieldProps>;
     PercentAdherence?: PrimitiveOverrideProps<TextFieldProps>;
     code?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
