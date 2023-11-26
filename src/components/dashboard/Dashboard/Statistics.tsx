@@ -157,7 +157,7 @@ export default function Statistics(props: any) {
               </div>
               <div className="stat-title font-bold text-tertiary-2">Adesões</div>
             </div>
-            <div className="mt-5 stat-value">{client.PercentAdherence ? client.PercentAdherence : 0}%</div>
+            <div className="mt-5 stat-value">{(client.totalEligibles && client.totalVaccinations) ? ((client.totalVaccinations / client.totalEligibles) * 100).toFixed(0) : 0}%</div>
             <div className="stat-desc">% de adesão</div>
           </div>
         </div>
@@ -172,16 +172,16 @@ export default function Statistics(props: any) {
         </div>
 
         <div className='mt-5 flex justify-between'>
-          <div>% unidades atendidas</div>
-          <div>{client.progressUnits}</div>
+          <div>{client.percentServed ? client.percentServed : 0}% unidades atendidas</div>
+          <div>{client.unitsServed ? client.unitsServed : 0}</div>
         </div>
-        <progress className="w-full progress progress-warning" value={client.progressUnits} max="100"></progress>
+        <progress className="w-full progress progress-warning" value={client.percentServed ? client.percentServed : 0} max="100"></progress>
 
         <div className='mt-2 flex justify-between'>
-          <div>% doses aplicadas</div>
-          <div>{client.progressVaccinations}</div>
+          <div>{(client.totalEligibles && client.totalVaccinations) ? ((client.totalVaccinations / client.totalEligibles) * 100).toFixed(0) : 0}% doses aplicadas</div>
+          <div>{client.totalVaccinations}</div>
         </div>
-        <progress className="w-full progress progress-success" value={client.progressVaccinations} max="100"></progress>
+        <progress className="w-full progress progress-success" value={(client.totalEligibles && client.totalVaccinations) ? ((client.totalVaccinations / client.totalEligibles) * 100).toFixed(0) : 0} max="100"></progress>
       </div>
     </div>
 
