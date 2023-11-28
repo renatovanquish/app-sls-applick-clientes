@@ -966,6 +966,7 @@ type Subscription {
   onCreateLog: Log @aws_subscribe(mutations: ["createLog"])
   onCreateNotify(userID: ID): Notify @aws_subscribe(mutations: ["createNotify"])
   onUpdateClient(clientID: ID): Client @aws_subscribe(mutations: ["updateClient"])
+  onUpdateClientCampaign(clientID: ID): ClientCampaign @aws_subscribe(mutations: ["updateClientCampaign"])
 }
 
 type Mutation @aws_api_key @aws_cognito_user_pools {
@@ -1317,10 +1318,10 @@ type Client
   schedulePending: Int
   totalEligibles: Int
   totalVaccinations: Int
-  PercentAdherence: Float
   code: String @index(name: "clientsByCode", queryField: "listClientsByCode")
   units: [ClientUnit] @hasMany(indexName: "unitsByClient", fields: ["id"])
   eligibles: [ClientEligible] @hasMany(indexName: "eligiblesByClient", fields: ["id"])
+  campaigns: [ClientCampaign] @hasMany(indexName: "clientCampaignsByClient", fields: ["id"])
   oss: [OS] @hasMany(indexName: "ossByClient", fields: ["id"])
 }
 
@@ -1376,6 +1377,7 @@ type ClientUnit
   contactName: String
   contactEmail: AWSEmail
   contactPhone: AWSPhone
+  totalEligibles: Int
   code: String @index(name: "unitsByCode", queryField: "listUnitsByCode")
   oss: [OS] @hasMany(indexName: "ossByClientUnit", fields: ["id"])
 }
@@ -1404,6 +1406,47 @@ type ClientEligible
   notes: String
   search: String
   relationship: String
+  isDependent: Boolean
+}
+
+enum ClientCampaignStatus {
+  STANDBY
+  STARTED
+  FINISHED
+}
+
+type ClientCampaign
+  @model(
+    mutations: {create: "createClientCampaign", update: "updateClientCampaign", delete: "deleteClientCampaign"},
+    queries: {get: "getClientCampaign", list: null},
+    subscriptions: null
+  )
+  @auth(rules: [
+    {allow: groups, provider: userPools, groups: ["Admin"], operations: [create, update, delete, read]},
+    {allow: public, provider: apiKey, operations: [create, delete, update, read]}
+  ]) {
+  id: ID! @primaryKey
+  clientID: ID!
+    @index(
+      name: "clientCampaignsByClient",
+      queryField: "listClientCampaignsByClient",
+    )
+  client: Client @hasOne(fields: ["clientID"])
+  name: String!
+  description: String
+  search: String
+  totalUnits: Int
+  unitsServed: Int
+  unitsExpected: Int
+  firstOSDate: AWSDate
+  lastOSDate: AWSDate
+  scheduleRouted: Int
+  scheduleConfirmed: Int
+  schedulePending: Int
+  totalEligibles: Int
+  totalVaccinations: Int
+  campaignCode: String @index(name: "clientCampaignsByCampaignCode", queryField: "listClientCampaignsByCampaignCode")
+  status: ClientCampaignStatus @index(name: "clientCampaignsByStatus", queryField: "listClientCampaignsByStatus")
 }
 
 enum OSStatus {
@@ -1428,6 +1471,7 @@ type OS
   id: ID! @primaryKey
   clientID: ID! @index(name: "ossByClient", queryField: "listOSsByClient")
   clientUnitID: ID! @index(name: "ossByClientUnit", queryField: "listOSsByClientUnit")
+  clientCampaignID: ID! @index(name: "ossByClientCampaign", queryField: "listOSsByClientCampaign")
   driverID: ID
   professionals: [ID!]!
   collaborators: [ID!]
@@ -1461,6 +1505,7 @@ type OS
   eligiblesVaccination: [EligibleVaccination] @hasMany(indexName: "eligiblesVaccinationByClientEligible", fields: ["id"])
   client: Client @hasOne(fields: ["clientID"])
   clientUnit: ClientUnit @hasOne(fields: ["clientUnitID"])
+  clientCampaign: ClientCampaign @hasOne(fields: ["clientCampaignID"])
 }
 
 enum EligibleVaccinationStatus {
@@ -1480,7 +1525,7 @@ type EligibleVaccination
   ]) {
   id: ID! @primaryKey
   osID: ID! @index(name: "eligiblesVaccinationByOS", queryField: "listEligiblesVaccinationByOS")
-  clientEligibleID: ID! @index(name: "eligiblesVaccinationByClientEligible", queryField: "listEligiblesVaccinationByClientEligible")
+  clientEligibleID: ID! @index(name: "eligiblesVaccinationByClientEligible", queryField: "listEligiblesVaccinationByClientEligible", sortKeyFields: ["applicationDate"])
   clientEligible: ClientEligible @hasOne(fields: ["clientEligibleID"])
   profissionalID: ID
   profissional: User @hasOne(fields: ["profissionalID"])

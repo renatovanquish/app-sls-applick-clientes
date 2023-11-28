@@ -9,3 +9,5 @@ out
 src/models
 tailwind.config
 amplify-codegen-temp/models
+
+amplify-codegen-temp/models/models

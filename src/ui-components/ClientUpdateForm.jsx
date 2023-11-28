@@ -44,7 +44,6 @@ export default function ClientUpdateForm(props) {
     schedulePending: "",
     totalEligibles: "",
     totalVaccinations: "",
-    PercentAdherence: "",
     code: "",
   };
   const [name, setName] = React.useState(initialValues.name);
@@ -77,9 +76,6 @@ export default function ClientUpdateForm(props) {
   const [totalVaccinations, setTotalVaccinations] = React.useState(
     initialValues.totalVaccinations
   );
-  const [PercentAdherence, setPercentAdherence] = React.useState(
-    initialValues.PercentAdherence
-  );
   const [code, setCode] = React.useState(initialValues.code);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -100,7 +96,6 @@ export default function ClientUpdateForm(props) {
     setSchedulePending(cleanValues.schedulePending);
     setTotalEligibles(cleanValues.totalEligibles);
     setTotalVaccinations(cleanValues.totalVaccinations);
-    setPercentAdherence(cleanValues.PercentAdherence);
     setCode(cleanValues.code);
     setErrors({});
   };
@@ -135,7 +130,6 @@ export default function ClientUpdateForm(props) {
     schedulePending: [],
     totalEligibles: [],
     totalVaccinations: [],
-    PercentAdherence: [],
     code: [],
   };
   const runValidationTasks = async (
@@ -178,7 +172,6 @@ export default function ClientUpdateForm(props) {
           schedulePending: schedulePending ?? null,
           totalEligibles: totalEligibles ?? null,
           totalVaccinations: totalVaccinations ?? null,
-          PercentAdherence: PercentAdherence ?? null,
           code: code ?? null,
         };
         const validationResponses = await Promise.all(
@@ -254,7 +247,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -293,7 +285,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -332,7 +323,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -382,7 +372,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -425,7 +414,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -468,7 +456,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -511,7 +498,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -551,7 +537,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -591,7 +576,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -634,7 +618,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -677,7 +660,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -722,7 +704,6 @@ export default function ClientUpdateForm(props) {
               schedulePending: value,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -765,7 +746,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles: value,
               totalVaccinations,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -808,7 +788,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations: value,
-              PercentAdherence,
               code,
             };
             const result = onChange(modelFields);
@@ -825,49 +804,6 @@ export default function ClientUpdateForm(props) {
         errorMessage={errors.totalVaccinations?.errorMessage}
         hasError={errors.totalVaccinations?.hasError}
         {...getOverrideProps(overrides, "totalVaccinations")}
-      ></TextField>
-      <TextField
-        label="Percent adherence"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={PercentAdherence}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              notes,
-              status,
-              search,
-              totalUnits,
-              unitsServed,
-              unitsExpected,
-              firstOSDate,
-              lastOSDate,
-              scheduleRouted,
-              scheduleConfirmed,
-              schedulePending,
-              totalEligibles,
-              totalVaccinations,
-              PercentAdherence: value,
-              code,
-            };
-            const result = onChange(modelFields);
-            value = result?.PercentAdherence ?? value;
-          }
-          if (errors.PercentAdherence?.hasError) {
-            runValidationTasks("PercentAdherence", value);
-          }
-          setPercentAdherence(value);
-        }}
-        onBlur={() => runValidationTasks("PercentAdherence", PercentAdherence)}
-        errorMessage={errors.PercentAdherence?.errorMessage}
-        hasError={errors.PercentAdherence?.hasError}
-        {...getOverrideProps(overrides, "PercentAdherence")}
       ></TextField>
       <TextField
         label="Code"
@@ -892,7 +828,6 @@ export default function ClientUpdateForm(props) {
               schedulePending,
               totalEligibles,
               totalVaccinations,
-              PercentAdherence,
               code: value,
             };
             const result = onChange(modelFields);

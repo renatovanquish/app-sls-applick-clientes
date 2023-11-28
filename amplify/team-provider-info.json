@@ -40,6 +40,10 @@
       },
       "storage": {
         "S3Storage": {}
+      },
+      "api": {
+        "AdminQueries": {},
+        "ApiGraphQL": {}
       }
     }
   }
