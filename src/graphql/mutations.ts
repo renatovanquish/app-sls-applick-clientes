@@ -3260,13 +3260,16 @@ export const createClient = /* GraphQL */ `mutation CreateClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    PercentAdherence
     code
     units {
       nextToken
       __typename
     }
     eligibles {
+      nextToken
+      __typename
+    }
+    campaigns {
       nextToken
       __typename
     }
@@ -3303,13 +3306,16 @@ export const updateClient = /* GraphQL */ `mutation UpdateClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    PercentAdherence
     code
     units {
       nextToken
       __typename
     }
     eligibles {
+      nextToken
+      __typename
+    }
+    campaigns {
       nextToken
       __typename
     }
@@ -3346,13 +3352,16 @@ export const deleteClient = /* GraphQL */ `mutation DeleteClient(
     schedulePending
     totalEligibles
     totalVaccinations
-    PercentAdherence
     code
     units {
       nextToken
       __typename
     }
     eligibles {
+      nextToken
+      __typename
+    }
+    campaigns {
       nextToken
       __typename
     }
@@ -3390,6 +3399,7 @@ export const createClientUnit = /* GraphQL */ `mutation CreateClientUnit(
     contactName
     contactEmail
     contactPhone
+    totalEligibles
     code
     oss {
       nextToken
@@ -3425,6 +3435,7 @@ export const updateClientUnit = /* GraphQL */ `mutation UpdateClientUnit(
     contactName
     contactEmail
     contactPhone
+    totalEligibles
     code
     oss {
       nextToken
@@ -3460,6 +3471,7 @@ export const deleteClientUnit = /* GraphQL */ `mutation DeleteClientUnit(
     contactName
     contactEmail
     contactPhone
+    totalEligibles
     code
     oss {
       nextToken
@@ -3489,6 +3501,7 @@ export const createClientEligible = /* GraphQL */ `mutation CreateClientEligible
     notes
     search
     relationship
+    isDependent
     createdAt
     updatedAt
     __typename
@@ -3513,6 +3526,7 @@ export const updateClientEligible = /* GraphQL */ `mutation UpdateClientEligible
     notes
     search
     relationship
+    isDependent
     createdAt
     updatedAt
     __typename
@@ -3537,6 +3551,7 @@ export const deleteClientEligible = /* GraphQL */ `mutation DeleteClientEligible
     notes
     search
     relationship
+    isDependent
     createdAt
     updatedAt
     __typename
@@ -3565,6 +3580,7 @@ export const createEligibleVaccination = /* GraphQL */ `mutation CreateEligibleV
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -3618,6 +3634,7 @@ export const updateEligibleVaccination = /* GraphQL */ `mutation UpdateEligibleV
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -3671,6 +3688,7 @@ export const deleteEligibleVaccination = /* GraphQL */ `mutation DeleteEligibleV
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -6801,7 +6819,6 @@ export const createClientUser = /* GraphQL */ `mutation CreateClientUser(
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6853,7 +6870,6 @@ export const deleteClientUser = /* GraphQL */ `mutation DeleteClientUser(
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6868,11 +6884,168 @@ export const deleteClientUser = /* GraphQL */ `mutation DeleteClientUser(
   APITypes.DeleteClientUserMutationVariables,
   APITypes.DeleteClientUserMutation
 >;
+export const createClientCampaign = /* GraphQL */ `mutation CreateClientCampaign(
+  $input: CreateClientCampaignInput!
+  $condition: ModelClientCampaignConditionInput
+) {
+  createClientCampaign(input: $input, condition: $condition) {
+    id
+    clientID
+    client {
+      id
+      name
+      notes
+      status
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      code
+      createdAt
+      updatedAt
+      __typename
+    }
+    name
+    description
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    campaignCode
+    status
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateClientCampaignMutationVariables,
+  APITypes.CreateClientCampaignMutation
+>;
+export const updateClientCampaign = /* GraphQL */ `mutation UpdateClientCampaign(
+  $input: UpdateClientCampaignInput!
+  $condition: ModelClientCampaignConditionInput
+) {
+  updateClientCampaign(input: $input, condition: $condition) {
+    id
+    clientID
+    client {
+      id
+      name
+      notes
+      status
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      code
+      createdAt
+      updatedAt
+      __typename
+    }
+    name
+    description
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    campaignCode
+    status
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateClientCampaignMutationVariables,
+  APITypes.UpdateClientCampaignMutation
+>;
+export const deleteClientCampaign = /* GraphQL */ `mutation DeleteClientCampaign(
+  $input: DeleteClientCampaignInput!
+  $condition: ModelClientCampaignConditionInput
+) {
+  deleteClientCampaign(input: $input, condition: $condition) {
+    id
+    clientID
+    client {
+      id
+      name
+      notes
+      status
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      code
+      createdAt
+      updatedAt
+      __typename
+    }
+    name
+    description
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    campaignCode
+    status
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteClientCampaignMutationVariables,
+  APITypes.DeleteClientCampaignMutation
+>;
 export const createOS = /* GraphQL */ `mutation CreateOS($input: CreateOSInput!, $condition: ModelOSConditionInput) {
   createOS(input: $input, condition: $condition) {
     id
     clientID
     clientUnitID
+    clientCampaignID
     driverID
     professionals
     collaborators
@@ -6923,7 +7096,6 @@ export const createOS = /* GraphQL */ `mutation CreateOS($input: CreateOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -6946,7 +7118,30 @@ export const createOS = /* GraphQL */ `mutation CreateOS($input: CreateOSInput!,
       contactName
       contactEmail
       contactPhone
+      totalEligibles
       code
+      createdAt
+      updatedAt
+      __typename
+    }
+    clientCampaign {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
       createdAt
       updatedAt
       __typename
@@ -6965,6 +7160,7 @@ export const updateOS = /* GraphQL */ `mutation UpdateOS($input: UpdateOSInput!,
     id
     clientID
     clientUnitID
+    clientCampaignID
     driverID
     professionals
     collaborators
@@ -7015,7 +7211,6 @@ export const updateOS = /* GraphQL */ `mutation UpdateOS($input: UpdateOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -7038,7 +7233,30 @@ export const updateOS = /* GraphQL */ `mutation UpdateOS($input: UpdateOSInput!,
       contactName
       contactEmail
       contactPhone
+      totalEligibles
       code
+      createdAt
+      updatedAt
+      __typename
+    }
+    clientCampaign {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
       createdAt
       updatedAt
       __typename
@@ -7057,6 +7275,7 @@ export const deleteOS = /* GraphQL */ `mutation DeleteOS($input: DeleteOSInput!,
     id
     clientID
     clientUnitID
+    clientCampaignID
     driverID
     professionals
     collaborators
@@ -7107,7 +7326,6 @@ export const deleteOS = /* GraphQL */ `mutation DeleteOS($input: DeleteOSInput!,
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -7130,7 +7348,30 @@ export const deleteOS = /* GraphQL */ `mutation DeleteOS($input: DeleteOSInput!,
       contactName
       contactEmail
       contactPhone
+      totalEligibles
       code
+      createdAt
+      updatedAt
+      __typename
+    }
+    clientCampaign {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
       createdAt
       updatedAt
       __typename

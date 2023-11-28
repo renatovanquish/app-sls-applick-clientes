@@ -412,13 +412,16 @@ export const onUpdateClient = /* GraphQL */ `subscription OnUpdateClient($client
     schedulePending
     totalEligibles
     totalVaccinations
-    PercentAdherence
     code
     units {
       nextToken
       __typename
     }
     eligibles {
+      nextToken
+      __typename
+    }
+    campaigns {
       nextToken
       __typename
     }
@@ -434,6 +437,55 @@ export const onUpdateClient = /* GraphQL */ `subscription OnUpdateClient($client
 ` as GeneratedSubscription<
   APITypes.OnUpdateClientSubscriptionVariables,
   APITypes.OnUpdateClientSubscription
+>;
+export const onUpdateClientCampaign = /* GraphQL */ `subscription OnUpdateClientCampaign($clientID: ID) {
+  onUpdateClientCampaign(clientID: $clientID) {
+    id
+    clientID
+    client {
+      id
+      name
+      notes
+      status
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      code
+      createdAt
+      updatedAt
+      __typename
+    }
+    name
+    description
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    campaignCode
+    status
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateClientCampaignSubscriptionVariables,
+  APITypes.OnUpdateClientCampaignSubscription
 >;
 export const onCreateCart = /* GraphQL */ `subscription OnCreateCart(
   $filter: ModelSubscriptionCartFilterInput

@@ -5082,13 +5082,16 @@ export const getClient = /* GraphQL */ `query GetClient($id: ID!) {
     schedulePending
     totalEligibles
     totalVaccinations
-    PercentAdherence
     code
     units {
       nextToken
       __typename
     }
     eligibles {
+      nextToken
+      __typename
+    }
+    campaigns {
       nextToken
       __typename
     }
@@ -5132,7 +5135,6 @@ export const listClients = /* GraphQL */ `query ListClients(
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -5178,7 +5180,6 @@ export const listClientsByStatusName = /* GraphQL */ `query ListClientsByStatusN
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -5222,7 +5223,6 @@ export const listClientsByCode = /* GraphQL */ `query ListClientsByCode(
       schedulePending
       totalEligibles
       totalVaccinations
-      PercentAdherence
       code
       createdAt
       updatedAt
@@ -5329,6 +5329,7 @@ export const listUnitsByClient = /* GraphQL */ `query ListUnitsByClient(
       contactName
       contactEmail
       contactPhone
+      totalEligibles
       code
       createdAt
       updatedAt
@@ -5373,6 +5374,7 @@ export const listUnitsByCode = /* GraphQL */ `query ListUnitsByCode(
       contactName
       contactEmail
       contactPhone
+      totalEligibles
       code
       createdAt
       updatedAt
@@ -5411,6 +5413,7 @@ export const listEligiblesByClient = /* GraphQL */ `query ListEligiblesByClient(
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -5450,6 +5453,7 @@ export const listEligiblesByClientKey = /* GraphQL */ `query ListEligiblesByClie
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -5489,6 +5493,7 @@ export const listEligiblesByClientCPF = /* GraphQL */ `query ListEligiblesByClie
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -5528,6 +5533,7 @@ export const listEligiblesByClientRG = /* GraphQL */ `query ListEligiblesByClien
       notes
       search
       relationship
+      isDependent
       createdAt
       updatedAt
       __typename
@@ -5539,6 +5545,187 @@ export const listEligiblesByClientRG = /* GraphQL */ `query ListEligiblesByClien
 ` as GeneratedQuery<
   APITypes.ListEligiblesByClientRGQueryVariables,
   APITypes.ListEligiblesByClientRGQuery
+>;
+export const getClientCampaign = /* GraphQL */ `query GetClientCampaign($id: ID!) {
+  getClientCampaign(id: $id) {
+    id
+    clientID
+    client {
+      id
+      name
+      notes
+      status
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      code
+      createdAt
+      updatedAt
+      __typename
+    }
+    name
+    description
+    search
+    totalUnits
+    unitsServed
+    unitsExpected
+    firstOSDate
+    lastOSDate
+    scheduleRouted
+    scheduleConfirmed
+    schedulePending
+    totalEligibles
+    totalVaccinations
+    campaignCode
+    status
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetClientCampaignQueryVariables,
+  APITypes.GetClientCampaignQuery
+>;
+export const listClientCampaignsByClient = /* GraphQL */ `query ListClientCampaignsByClient(
+  $clientID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelClientCampaignFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listClientCampaignsByClient(
+    clientID: $clientID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListClientCampaignsByClientQueryVariables,
+  APITypes.ListClientCampaignsByClientQuery
+>;
+export const listClientCampaignsByCampaignCode = /* GraphQL */ `query ListClientCampaignsByCampaignCode(
+  $campaignCode: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelClientCampaignFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listClientCampaignsByCampaignCode(
+    campaignCode: $campaignCode
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListClientCampaignsByCampaignCodeQueryVariables,
+  APITypes.ListClientCampaignsByCampaignCodeQuery
+>;
+export const listClientCampaignsByStatus = /* GraphQL */ `query ListClientCampaignsByStatus(
+  $status: ClientCampaignStatus!
+  $sortDirection: ModelSortDirection
+  $filter: ModelClientCampaignFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listClientCampaignsByStatus(
+    status: $status
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      name
+      description
+      search
+      totalUnits
+      unitsServed
+      unitsExpected
+      firstOSDate
+      lastOSDate
+      scheduleRouted
+      scheduleConfirmed
+      schedulePending
+      totalEligibles
+      totalVaccinations
+      campaignCode
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListClientCampaignsByStatusQueryVariables,
+  APITypes.ListClientCampaignsByStatusQuery
 >;
 export const listOSs = /* GraphQL */ `query ListOSs(
   $id: ID
@@ -5558,6 +5745,7 @@ export const listOSs = /* GraphQL */ `query ListOSs(
       id
       clientID
       clientUnitID
+      clientCampaignID
       driverID
       professionals
       collaborators
@@ -5615,6 +5803,7 @@ export const listOSsByClient = /* GraphQL */ `query ListOSsByClient(
       id
       clientID
       clientUnitID
+      clientCampaignID
       driverID
       professionals
       collaborators
@@ -5675,6 +5864,7 @@ export const listOSsByClientUnit = /* GraphQL */ `query ListOSsByClientUnit(
       id
       clientID
       clientUnitID
+      clientCampaignID
       driverID
       professionals
       collaborators
@@ -5717,6 +5907,67 @@ export const listOSsByClientUnit = /* GraphQL */ `query ListOSsByClientUnit(
   APITypes.ListOSsByClientUnitQueryVariables,
   APITypes.ListOSsByClientUnitQuery
 >;
+export const listOSsByClientCampaign = /* GraphQL */ `query ListOSsByClientCampaign(
+  $clientCampaignID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelOSFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOSsByClientCampaign(
+    clientCampaignID: $clientCampaignID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      clientUnitID
+      clientCampaignID
+      driverID
+      professionals
+      collaborators
+      number
+      start
+      expiration
+      orientation
+      notes
+      status
+      allowOffList
+      withList
+      vaccination
+      qtyApplication
+      dateStarted
+      dateFinished
+      professionalStarted
+      professionalFinished
+      notesStarted
+      notesFinished
+      clientNameStarted
+      clientNameFinished
+      unitNameFinished
+      contactNameFinished
+      contactDocFinished
+      contactCRMFinished
+      contactEmailFinished
+      stayVaccines
+      stayQtd
+      lat
+      lng
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListOSsByClientCampaignQueryVariables,
+  APITypes.ListOSsByClientCampaignQuery
+>;
 export const listOSsByNumber = /* GraphQL */ `query ListOSsByNumber(
   $number: Int!
   $sortDirection: ModelSortDirection
@@ -5735,6 +5986,7 @@ export const listOSsByNumber = /* GraphQL */ `query ListOSsByNumber(
       id
       clientID
       clientUnitID
+      clientCampaignID
       driverID
       professionals
       collaborators
@@ -5797,6 +6049,7 @@ export const listOSsByStatusNumber = /* GraphQL */ `query ListOSsByStatusNumber(
       id
       clientID
       clientUnitID
+      clientCampaignID
       driverID
       professionals
       collaborators
@@ -5879,6 +6132,7 @@ export const listEligiblesVaccinationByOS = /* GraphQL */ `query ListEligiblesVa
 >;
 export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query ListEligiblesVaccinationByClientEligible(
   $clientEligibleID: ID!
+  $applicationDate: ModelStringKeyConditionInput
   $sortDirection: ModelSortDirection
   $filter: ModelEligibleVaccinationFilterInput
   $limit: Int
@@ -5886,6 +6140,7 @@ export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query Lis
 ) {
   listEligiblesVaccinationByClientEligible(
     clientEligibleID: $clientEligibleID
+    applicationDate: $applicationDate
     sortDirection: $sortDirection
     filter: $filter
     limit: $limit
