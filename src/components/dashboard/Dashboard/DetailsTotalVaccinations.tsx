@@ -27,7 +27,7 @@ export default function DetailsTotalVaccinations(props: any) {
     variables={{
       clientID,
       limit: 100,
-      sortDirection: ModelSortDirection.ASC,
+      sortDirection: ModelSortDirection.DESC,
       nextToken: null
     }}
     layout='flexCol'
