@@ -1941,6 +1941,7 @@ export type EligibleVaccination = {
   osID: string,
   clientEligibleID: string,
   clientEligible?: ClientEligible | null,
+  clientID: string,
   profissionalID?: string | null,
   profissional?: User | null,
   coren?: string | null,
@@ -2116,6 +2117,30 @@ export type ClientUser = {
   client?: Client | null,
   createdAt: string,
   updatedAt: string,
+};
+
+export type ModelClientUnitFilterInput = {
+  id?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  street?: ModelStringInput | null,
+  number?: ModelStringInput | null,
+  complement?: ModelStringInput | null,
+  zipcode?: ModelStringInput | null,
+  neighborhood?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  state?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  search?: ModelStringInput | null,
+  contactName?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  contactPhone?: ModelStringInput | null,
+  totalEligibles?: ModelIntInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelClientUnitFilterInput | null > | null,
+  or?: Array< ModelClientUnitFilterInput | null > | null,
+  not?: ModelClientUnitFilterInput | null,
 };
 
 export type UpdateUserInput = {
@@ -3874,6 +3899,7 @@ export type CreateEligibleVaccinationInput = {
   id?: string | null,
   osID: string,
   clientEligibleID: string,
+  clientID: string,
   profissionalID?: string | null,
   coren?: string | null,
   applicationDate?: string | null,
@@ -3887,6 +3913,7 @@ export type CreateEligibleVaccinationInput = {
 export type ModelEligibleVaccinationConditionInput = {
   osID?: ModelIDInput | null,
   clientEligibleID?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
   profissionalID?: ModelIDInput | null,
   coren?: ModelStringInput | null,
   applicationDate?: ModelStringInput | null,
@@ -3909,6 +3936,7 @@ export type UpdateEligibleVaccinationInput = {
   id: string,
   osID?: string | null,
   clientEligibleID?: string | null,
+  clientID?: string | null,
   profissionalID?: string | null,
   coren?: string | null,
   applicationDate?: string | null,
@@ -5268,30 +5296,6 @@ export type ModelClientConnection = {
   nextToken?: string | null,
 };
 
-export type ModelClientUnitFilterInput = {
-  id?: ModelIDInput | null,
-  clientID?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  street?: ModelStringInput | null,
-  number?: ModelStringInput | null,
-  complement?: ModelStringInput | null,
-  zipcode?: ModelStringInput | null,
-  neighborhood?: ModelStringInput | null,
-  city?: ModelStringInput | null,
-  state?: ModelStringInput | null,
-  country?: ModelStringInput | null,
-  notes?: ModelStringInput | null,
-  search?: ModelStringInput | null,
-  contactName?: ModelStringInput | null,
-  contactEmail?: ModelStringInput | null,
-  contactPhone?: ModelStringInput | null,
-  totalEligibles?: ModelIntInput | null,
-  code?: ModelStringInput | null,
-  and?: Array< ModelClientUnitFilterInput | null > | null,
-  or?: Array< ModelClientUnitFilterInput | null > | null,
-  not?: ModelClientUnitFilterInput | null,
-};
-
 export type ModelClientEligibleFilterInput = {
   id?: ModelIDInput | null,
   clientID?: ModelIDInput | null,
@@ -5336,6 +5340,7 @@ export type ModelEligibleVaccinationFilterInput = {
   id?: ModelIDInput | null,
   osID?: ModelIDInput | null,
   clientEligibleID?: ModelIDInput | null,
+  clientID?: ModelIDInput | null,
   profissionalID?: ModelIDInput | null,
   coren?: ModelStringInput | null,
   applicationDate?: ModelStringInput | null,
@@ -9527,6 +9532,60 @@ export type ListClientUserByUserCustomQuery = {
   } | null,
 };
 
+export type ListUnitsByClientCustomQueryVariables = {
+  clientID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClientUnitFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUnitsByClientCustomQuery = {
+  listUnitsByClient?:  {
+    __typename: "ModelClientUnitConnection",
+    items:  Array< {
+      __typename: "ClientUnit",
+      id: string,
+      clientID: string,
+      name?: string | null,
+      street?: string | null,
+      number?: string | null,
+      complement?: string | null,
+      zipcode?: string | null,
+      neighborhood?: string | null,
+      city?: string | null,
+      state?: string | null,
+      country?: string | null,
+      notes?: string | null,
+      search?: string | null,
+      contactName?: string | null,
+      contactEmail?: string | null,
+      contactPhone?: string | null,
+      totalEligibles?: number | null,
+      code?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      oss?:  {
+        __typename: "ModelOSConnection",
+        items:  Array< {
+          __typename: "OS",
+          number: number,
+          start?: string | null,
+          dateStarted?: string | null,
+          status: OSStatus,
+          qtyApplication?: number | null,
+          stayQtd?: number | null,
+          clientCampaign?:  {
+            __typename: "ClientCampaign",
+            name: string,
+          } | null,
+        } | null >,
+      } | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type AdminDeleteUserMutationVariables = {
   id?: string | null,
 };
@@ -13024,6 +13083,7 @@ export type CreateEligibleVaccinationMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    clientID: string,
     profissionalID?: string | null,
     profissional?:  {
       __typename: "User",
@@ -13077,6 +13137,7 @@ export type UpdateEligibleVaccinationMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    clientID: string,
     profissionalID?: string | null,
     profissional?:  {
       __typename: "User",
@@ -13130,6 +13191,7 @@ export type DeleteEligibleVaccinationMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    clientID: string,
     profissionalID?: string | null,
     profissional?:  {
       __typename: "User",
@@ -21775,6 +21837,116 @@ export type ListOSsByClientQuery = {
   } | null,
 };
 
+export type ListOSsByClientStartQueryVariables = {
+  clientID: string,
+  start?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByClientStartQuery = {
+  listOSsByClientStart?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      clientCampaignID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListOSsByClientStatusQueryVariables = {
+  clientID: string,
+  status?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelOSFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOSsByClientStatusQuery = {
+  listOSsByClientStatus?:  {
+    __typename: "ModelOSConnection",
+    items:  Array< {
+      __typename: "OS",
+      id: string,
+      clientID: string,
+      clientUnitID: string,
+      clientCampaignID: string,
+      driverID?: string | null,
+      professionals: Array< string >,
+      collaborators?: Array< string > | null,
+      number: number,
+      start?: string | null,
+      expiration?: string | null,
+      orientation?: string | null,
+      notes?: string | null,
+      status: OSStatus,
+      allowOffList?: boolean | null,
+      withList?: boolean | null,
+      vaccination?: string | null,
+      qtyApplication?: number | null,
+      dateStarted?: string | null,
+      dateFinished?: string | null,
+      professionalStarted?: string | null,
+      professionalFinished?: string | null,
+      notesStarted?: string | null,
+      notesFinished?: string | null,
+      clientNameStarted?: string | null,
+      clientNameFinished?: string | null,
+      unitNameFinished?: string | null,
+      contactNameFinished?: string | null,
+      contactDocFinished?: string | null,
+      contactCRMFinished?: string | null,
+      contactEmailFinished?: string | null,
+      stayVaccines?: boolean | null,
+      stayQtd?: number | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ListOSsByClientUnitQueryVariables = {
   clientUnitID: string,
   sortDirection?: ModelSortDirection | null,
@@ -22008,6 +22180,7 @@ export type ListEligiblesVaccinationByOSQuery = {
       id: string,
       osID: string,
       clientEligibleID: string,
+      clientID: string,
       profissionalID?: string | null,
       coren?: string | null,
       applicationDate?: string | null,
@@ -22040,6 +22213,40 @@ export type ListEligiblesVaccinationByClientEligibleQuery = {
       id: string,
       osID: string,
       clientEligibleID: string,
+      clientID: string,
+      profissionalID?: string | null,
+      coren?: string | null,
+      applicationDate?: string | null,
+      reason?: string | null,
+      vaccination?: string | null,
+      status?: EligibleVaccinationStatus | null,
+      localCity?: string | null,
+      localState?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListEligiblesVaccinationByClientDateQueryVariables = {
+  clientID: string,
+  applicationDate?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEligibleVaccinationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEligiblesVaccinationByClientDateQuery = {
+  listEligiblesVaccinationByClientDate?:  {
+    __typename: "ModelEligibleVaccinationConnection",
+    items:  Array< {
+      __typename: "EligibleVaccination",
+      id: string,
+      osID: string,
+      clientEligibleID: string,
+      clientID: string,
       profissionalID?: string | null,
       coren?: string | null,
       applicationDate?: string | null,

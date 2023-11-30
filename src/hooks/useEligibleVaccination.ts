@@ -10,6 +10,7 @@ import {
   UpdateEligibleVaccinationInput,
   DeleteEligibleVaccinationInput,
   ListEligiblesVaccinationByClientEligibleQueryVariables,
+  ListEligiblesVaccinationByClientDateQueryVariables
 } from 'API'
 
 export const useEligibleVaccination = () => {
@@ -68,10 +69,26 @@ export const useEligibleVaccination = () => {
     return { items, nextToken }
   }
 
+  const listEligiblesVaccinationByClientDate = async (
+    variables: ListEligiblesVaccinationByClientDateQueryVariables
+  ) => {
+    const {
+      data: {
+        listEligiblesVaccinationByClientDate: { items, nextToken },
+      },
+    } = (await API.graphql({
+      query: customQueries.listEligiblesVaccinationByClientDate,
+      variables,
+      authMode: GRAPHQL_AUTH_MODE.API_KEY,
+    })) as GraphQLResult<any>
+    return { items, nextToken }
+  }
+
   return {
     createEligibleVaccination,
     updateEligibleVaccination,
     deleteEligibleVaccination,
     listEligiblesVaccinationByClientEligible,
+    listEligiblesVaccinationByClientDate
   }
 }

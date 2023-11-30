@@ -3989,3 +3989,113 @@ export const listClientUserByUser = /* GraphQL */ `query ListClientUserByUserCus
   APITypes.ListClientUserByUserQueryVariables,
   APITypes.ListClientUserByUserQuery
 >;
+export const listUnitsByClient = /* GraphQL */ `query ListUnitsByClientCustom(
+  $clientID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelClientUnitFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUnitsByClient(
+    clientID: $clientID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      name
+      street
+      number
+      complement
+      zipcode
+      neighborhood
+      city
+      state
+      country
+      notes
+      search
+      contactName
+      contactEmail
+      contactPhone
+      totalEligibles
+      code
+      createdAt
+      updatedAt
+      oss {
+        items {
+          number
+          start
+          dateStarted
+          status
+          qtyApplication
+          stayQtd
+          clientCampaign {
+            name
+          }
+        }
+      }
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListUnitsByClientQueryVariables,
+  APITypes.ListUnitsByClientQuery
+>;
+export const listEligiblesVaccinationByClientDate = /* GraphQL */ `query ListEligiblesVaccinationByClientDateCustom(
+  $clientID: ID!
+  $applicationDate: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelEligibleVaccinationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEligiblesVaccinationByClientDate(
+    clientID: $clientID
+    applicationDate: $applicationDate
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      osID
+      clientEligibleID
+      clientID
+      profissionalID
+      coren
+      applicationDate
+      reason
+      vaccination
+      status
+      localCity
+      localState
+      createdAt
+      updatedAt
+      clientEligible {
+        id
+        key
+        name
+        cpf
+        rg
+        birth
+        notes
+        relationship
+        isDependent
+      }
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListEligiblesVaccinationByClientDateQueryVariables,
+  APITypes.ListEligiblesVaccinationByClientDateQuery
+>;

@@ -3585,6 +3585,7 @@ export const createEligibleVaccination = /* GraphQL */ `mutation CreateEligibleV
       updatedAt
       __typename
     }
+    clientID
     profissionalID
     profissional {
       id
@@ -3639,6 +3640,7 @@ export const updateEligibleVaccination = /* GraphQL */ `mutation UpdateEligibleV
       updatedAt
       __typename
     }
+    clientID
     profissionalID
     profissional {
       id
@@ -3693,6 +3695,7 @@ export const deleteEligibleVaccination = /* GraphQL */ `mutation DeleteEligibleV
       updatedAt
       __typename
     }
+    clientID
     profissionalID
     profissional {
       id

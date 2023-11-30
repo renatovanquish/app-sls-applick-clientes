@@ -1469,7 +1469,10 @@ type OS
     {allow: public, provider: apiKey, operations: [read, update, create, delete]}
     ]) {
   id: ID! @primaryKey
-  clientID: ID! @index(name: "ossByClient", queryField: "listOSsByClient")
+  clientID: ID!
+    @index(name: "ossByClient", queryField: "listOSsByClient")
+    @index(name: "ossByClientStart", queryField: "listOSsByClientStart", sortKeyFields: ["start"])
+    @index(name: "ossByClientStatus", queryField: "listOSsByClientStatus", sortKeyFields: ["status"])
   clientUnitID: ID! @index(name: "ossByClientUnit", queryField: "listOSsByClientUnit")
   clientCampaignID: ID! @index(name: "ossByClientCampaign", queryField: "listOSsByClientCampaign")
   driverID: ID
@@ -1527,6 +1530,7 @@ type EligibleVaccination
   osID: ID! @index(name: "eligiblesVaccinationByOS", queryField: "listEligiblesVaccinationByOS")
   clientEligibleID: ID! @index(name: "eligiblesVaccinationByClientEligible", queryField: "listEligiblesVaccinationByClientEligible", sortKeyFields: ["applicationDate"])
   clientEligible: ClientEligible @hasOne(fields: ["clientEligibleID"])
+  clientID: ID! @index(name: "eligiblesVaccinationByClientDate", queryField: "listEligiblesVaccinationByClientDate", sortKeyFields: ["applicationDate"])
   profissionalID: ID
   profissional: User @hasOne(fields: ["profissionalID"])
   coren: String

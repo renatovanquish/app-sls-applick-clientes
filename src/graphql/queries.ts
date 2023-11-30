@@ -5846,6 +5846,132 @@ export const listOSsByClient = /* GraphQL */ `query ListOSsByClient(
   APITypes.ListOSsByClientQueryVariables,
   APITypes.ListOSsByClientQuery
 >;
+export const listOSsByClientStart = /* GraphQL */ `query ListOSsByClientStart(
+  $clientID: ID!
+  $start: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelOSFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOSsByClientStart(
+    clientID: $clientID
+    start: $start
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      clientUnitID
+      clientCampaignID
+      driverID
+      professionals
+      collaborators
+      number
+      start
+      expiration
+      orientation
+      notes
+      status
+      allowOffList
+      withList
+      vaccination
+      qtyApplication
+      dateStarted
+      dateFinished
+      professionalStarted
+      professionalFinished
+      notesStarted
+      notesFinished
+      clientNameStarted
+      clientNameFinished
+      unitNameFinished
+      contactNameFinished
+      contactDocFinished
+      contactCRMFinished
+      contactEmailFinished
+      stayVaccines
+      stayQtd
+      lat
+      lng
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListOSsByClientStartQueryVariables,
+  APITypes.ListOSsByClientStartQuery
+>;
+export const listOSsByClientStatus = /* GraphQL */ `query ListOSsByClientStatus(
+  $clientID: ID!
+  $status: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelOSFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOSsByClientStatus(
+    clientID: $clientID
+    status: $status
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      clientID
+      clientUnitID
+      clientCampaignID
+      driverID
+      professionals
+      collaborators
+      number
+      start
+      expiration
+      orientation
+      notes
+      status
+      allowOffList
+      withList
+      vaccination
+      qtyApplication
+      dateStarted
+      dateFinished
+      professionalStarted
+      professionalFinished
+      notesStarted
+      notesFinished
+      clientNameStarted
+      clientNameFinished
+      unitNameFinished
+      contactNameFinished
+      contactDocFinished
+      contactCRMFinished
+      contactEmailFinished
+      stayVaccines
+      stayQtd
+      lat
+      lng
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListOSsByClientStatusQueryVariables,
+  APITypes.ListOSsByClientStatusQuery
+>;
 export const listOSsByClientUnit = /* GraphQL */ `query ListOSsByClientUnit(
   $clientUnitID: ID!
   $sortDirection: ModelSortDirection
@@ -6110,6 +6236,7 @@ export const listEligiblesVaccinationByOS = /* GraphQL */ `query ListEligiblesVa
       id
       osID
       clientEligibleID
+      clientID
       profissionalID
       coren
       applicationDate
@@ -6150,6 +6277,7 @@ export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query Lis
       id
       osID
       clientEligibleID
+      clientID
       profissionalID
       coren
       applicationDate
@@ -6169,4 +6297,45 @@ export const listEligiblesVaccinationByClientEligible = /* GraphQL */ `query Lis
 ` as GeneratedQuery<
   APITypes.ListEligiblesVaccinationByClientEligibleQueryVariables,
   APITypes.ListEligiblesVaccinationByClientEligibleQuery
+>;
+export const listEligiblesVaccinationByClientDate = /* GraphQL */ `query ListEligiblesVaccinationByClientDate(
+  $clientID: ID!
+  $applicationDate: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelEligibleVaccinationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEligiblesVaccinationByClientDate(
+    clientID: $clientID
+    applicationDate: $applicationDate
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      osID
+      clientEligibleID
+      clientID
+      profissionalID
+      coren
+      applicationDate
+      reason
+      vaccination
+      status
+      localCity
+      localState
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListEligiblesVaccinationByClientDateQueryVariables,
+  APITypes.ListEligiblesVaccinationByClientDateQuery
 >;

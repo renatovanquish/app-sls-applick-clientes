@@ -11,6 +11,8 @@ import {
   DeleteOSInput,
   ListOSsQueryVariables,
   ListOSsByClientQueryVariables,
+  ListOSsByClientStatusQueryVariables,
+  ListOSsByClientStartQueryVariables,
   ListOSsByClientUnitQueryVariables,
   ListOSsByNumberQueryVariables,
   ListOSsByStatusNumberQueryVariables,
@@ -87,6 +89,36 @@ export const useOS = () => {
     return { items, nextToken }
   }
 
+  const listOSsByClientStatus = async (
+    variables: ListOSsByClientStatusQueryVariables
+  ) => {
+    const {
+      data: {
+        listOSsByClientStatus: { items, nextToken },
+      },
+    } = (await API.graphql({
+      query: queries.listOSsByClientStatus,
+      variables,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+    })) as GraphQLResult<any>
+    return { items, nextToken }
+  }
+
+  const listOSsByClientStart = async (
+    variables: ListOSsByClientStartQueryVariables
+  ) => {
+    const {
+      data: {
+        listOSsByClientStart: { items, nextToken },
+      },
+    } = (await API.graphql({
+      query: queries.listOSsByClientStart,
+      variables,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+    })) as GraphQLResult<any>
+    return { items, nextToken }
+  }
+
   const listOSsByClientUnit = async (
     variables: ListOSsByClientUnitQueryVariables
   ) => {
@@ -138,6 +170,8 @@ export const useOS = () => {
     deleteOS,
     listOSs,
     listOSsByClient,
+    listOSsByClientStatus,
+    listOSsByClientStart,
     listOSsByClientUnit,
     listOSsByNumber,
     listOSsByStatusNumber,

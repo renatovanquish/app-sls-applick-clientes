@@ -26,7 +26,7 @@ const DashClientes: FC<Props> = ({ }) => {
         const { items } = await listClientUserByUser({ userID: user.id, limit: 100 })
         const c = [] as any
         items.map((item: any) => {
-          c.push(item.client)
+          if (item.client) { c.push(item.client) }
         })
         setClient(c.length === 1 ? c[0] : {})
         setClients(c)
@@ -93,7 +93,7 @@ const DashClientes: FC<Props> = ({ }) => {
     {checked && clients.length > 1 && <SelectClient />}
     {checked && clients.length === 1 && <div className='text-center text-4xl font-bold text-tertiary-2 tracking-wide'>{clients[0].name}</div>}
 
-    {checked && client.id && <Statistics client={client} />}
+    {checked && client.id && <Statistics client={client} userID={user.id} />}
 
   </div>) : <BannerUserNotFound />
 }
